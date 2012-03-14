@@ -11,12 +11,51 @@ body{
 
 #titletext{
 	position: absolute;
-	top: 10%;
 	font-size: 4em;
 	color: white;
 	font-family: "Arial Black", Gadget, sans-serif;
 }
 
+#maindiv{
+	width: 100%;
+	background-color: blue;
+	-moz-box-shadow: -5px 0px -5px #000000;
+	-webkit-box-shadow: -5px 0px 5px #000000;
+	box-shadow: -5px 0px 5px #000000;
+}
+
+#centertable{
+	width: 100%;
+}
+
+#leftbox{
+	width: 50%;
+	background-color: grey;
+	text-align: center;
+}
+
+#rightbox{
+	width: 50%;
+	background-color: white;
+}
+
+#bottombar{
+	width: 95%;
+	background-color: #8EF13C;
+	color: black;
+	position: absolute;
+	bottom: 0px;
+}
+
+#bottombar li{
+	list-style: none;
+	float: right;
+}
+
+#bottombar a{
+	text-decoration: none;
+	padding: 5px;
+}
 
 #centerdiv{
 	margin:  100px;
