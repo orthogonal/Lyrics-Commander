@@ -18,30 +18,39 @@ body{
 
 #maindiv{
 	width: 100%;
-	background-color: blue;
-	-moz-box-shadow: -5px 0px -5px #000000;
-	-webkit-box-shadow: -5px 0px 5px #000000;
-	box-shadow: -5px 0px 5px #000000;
+	height: 500px;
+	border-bottom-right-radius: 50px;
+	border-bottom-left-radius: 50px;
+	-moz-box-shadow: -5px 5px -5px #000000;
+	-webkit-box-shadow: -5px 5px 5px #000000;
+	box-shadow: -5px 5px 5px #000000;
+	
+	background-color: #8EF13C;
+	background-image:  url("divbg.png");
+	
 }
 
 #centertable{
 	width: 100%;
+	height: 100%;
 }
 
 #leftbox{
 	width: 50%;
-	background-color: grey;
 	text-align: center;
+	border-bottom-left-radius: 50px;
 }
 
 #rightbox{
 	width: 50%;
-	background-color: white;
+	text-align: center;
+	border-bottom-right-radius: 50px;
 }
 
 #bottombar{
 	width: 95%;
 	background-color: #8EF13C;
+	background-image:  url("divbg.png");
 	color: black;
 	position: absolute;
 	bottom: 0px;
