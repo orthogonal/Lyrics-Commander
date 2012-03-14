@@ -20,9 +20,12 @@
 			<br />
 		</div>
 		
-		<div id="inputdiv">
-			<input type="text" name="emotion" size="100" maxlength="20" id="inputbox"/>
-		</div>
+		<form method="post" action="main.php">
+			<div id="inputdiv">
+				<input type="text" name="emotion" size="30" maxlength="20" id="inputbox"/>
+				<input type="submit" value="Next" id="nextbutton"/>
+			</div>
+		</form>
 		
 		<div id="bottombar">
 			<li>
