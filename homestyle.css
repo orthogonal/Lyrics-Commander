@@ -1,0 +1,33 @@
+body{
+	background-color:  #64AB2B;	
+	background-image:  url("homebg.png");
+}
+
+#titlebar{
+	height: 100px;
+	width: 100%;
+	position: relative;
+}
+
+#titletext{
+	position: absolute;
+	top: 10%;
+	font-size: 4em;
+	color: white;
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+
+
+#centerdiv{
+	margin:  100px;
+	text-align: center;
+}
+
+#centerbutton{
+	height: 100px;
+	width: 300px;
+	font-size: 3em;
+	background-color: #12B31F;
+	color: black;
+	border-radius:  100px;
+}
