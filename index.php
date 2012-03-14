@@ -25,6 +25,7 @@
 		
 		<div id="bottombar">
 			<li>
+				<a href="#statistics">Statistics</a>
 				<a href="#settings">Settings</a>
 				<a href="#logout">Logout</a>
 				<a href="#about">About</a>
