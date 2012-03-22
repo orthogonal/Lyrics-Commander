@@ -6,6 +6,11 @@
 		<script>
 			$(document).ready(function(){
 				newStanza();
+				
+				$('#inputdiv').submit(function(evt){		//Get a new stanza with AJAX without reloading the page
+					evt.preventDefault();					//Right now, this doesn't write ratings to the database
+					newStanza();
+				});
 			});
 			
 			function newStanza(){
@@ -14,7 +19,26 @@
 				var stanzaID = (Math.floor(Math.random() * maxVal) + 1)				//Get a number from 0 to (maxVal - 1) and add 1, so it's from 1 to maxVal (a random stanzaID)
 				$('#stanzaID').attr('value', stanzaID);								//Store the stanzaID in a hidden form field
 				var pageVals = $('#hidden').serialize();							//Serialize the form so that it can be passed via AJAX.
-				$.post("getstanza.php", pageVals, function(data){alert(data)});
+				$.post("getstanza.php", pageVals, function(data){
+					var values = data.split("&");
+					$('#lyrics').html(values[0]);
+					$('#artist').text(values[4]);
+					$('#song').text(values[1]);
+					$('#album').text(values[2]);
+					
+						/*	In conclusion:
+		0:  Stanza text
+		1:  Song name
+		2:  Album
+		3:  Album URL
+		4:  Artist name
+		5:  Artist URL
+		6:  Artist biography
+		Delimiter is "&"
+		Output will have "&?" in it if there is an error, followed by the error, with nothing after that.
+		*/
+				});
+				
 			}
 		</script>
 	<head>
@@ -24,14 +48,24 @@
 		</div>
 		
 		<div id="lyricsdiv">
+		<span id="everything">
 			<span id="lyrics">
-				You think I'm eager to shut your eyes
-				<br />Well, I'm sorry everybody knows you can't break me
-				<br />With your gutter prose
-				<br />
-				<br />Voxtrot
-				<br />The Start of Something
+				Lyrics Go Here
 			</span>
+			<br />
+			<br />
+			<span id="artist">
+				Artist goes here
+			</span>
+			<br />
+			<span id="song">
+				Song name goes here
+			</span>
+			<br />
+			<span id="album">
+				Album goes here
+			</span>
+		</span>
 			<br />
 		</div>
 		
