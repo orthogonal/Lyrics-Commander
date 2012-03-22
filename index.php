@@ -11,7 +11,13 @@ echo <<<_HDOC
 	<head>
 		<title>Lyrics Commander</title>
 		<link rel="stylesheet" type="text/css" href="homestyle.css" />
-		<script src="_js/jquery-1.7.js"></script> 
+				<script src="_js/jquery-1.7.js"></script>
+		<script>
+			$(document).ready(function(){
+				
+				
+			});
+		</script>
 	<head>
 
 	<body>

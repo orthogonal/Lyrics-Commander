@@ -2,6 +2,21 @@
 	<head>
 		<title>Lyrics Commander</title>
 		<link rel="stylesheet" type="text/css" href="homestyle.css" />
+		<script src="_js/jquery-1.7.js"></script>
+		<script>
+			$(document).ready(function(){
+				newStanza();
+			});
+			
+			function newStanza(){
+				var maxVal = 0;
+				$.post("globals.php", function(data) {maxVal = parseInt(data)});	//AJAX call to globals page, this will need to be updated once there are multiple globals.
+				var stanzaID = (Math.floor(Math.random() * maxVal) + 1)				//Get a number from 0 to (maxVal - 1) and add 1, so it's from 1 to maxVal (a random stanzaID)
+				$('#stanzaID').attr('value', stanzaID);								//Store the stanzaID in a hidden form field
+				var pageVals = $('#hidden').serialize();							//Serialize the form so that it can be passed via AJAX.
+				$.post("getstanza.php", pageVals, function(data){alert(data)});
+			}
+		</script>
 	<head>
 	<body>
 		<div id="titlebar">
@@ -35,6 +50,11 @@
 				<a href="#about">About</a>
 			</li>
 		</div>
+		
+		<!-- This form holds values generated in the JavaScript functions that are passed by AJAX-->
+		<form method="post" action="" id="hidden">
+			<input type="hidden" name="stanzaID" id="stanzaID" value="0" />
+		</form>
 		
 	</body>
 </html>
