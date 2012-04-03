@@ -1,9 +1,32 @@
-<!DOCTYPE html>
 <?php
+require_once "db_login.php";
+$db_server = mysql_connect($db_hostname, $db_username, $db_password);
+mysql_select_db($db_database, $db_server); 
+	
 $loggedin = false;
 $cookieinfo = explode("%", $_COOKIE['main']);
 if ($cookieinfo[0] != null)
 	$loggedin = true;
+	
+if ($_POST["login_name"] != null){
+	$username = $_POST["login_name"];
+	$password = $_POST["login_password"];
+	$query = "SELECT * 
+			  FROM User
+			  WHERE `Username` = '$username'";
+	$result = mysql_query($query);
+	if ($result == null)
+		; //No such username
+	else{
+		$row = mysql_fetch_row($result);
+		if ($row[2] == md5($password)){
+			$loggedin = true;
+			setcookie("main", $row[0], time() + 3600, "/");
+		}
+		else
+			;	//Incorrect password
+	}
+}
 
 
 echo <<<_HDOC
@@ -17,6 +40,11 @@ echo <<<_HDOC
 				
 				
 			});
+			
+			function logout(){
+				document.cookie = "main" + '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
+				location.reload(true);
+			}
 		</script>
 	<head>
 
@@ -43,7 +71,14 @@ _HDOC;
 else{	//If logged out
 	echo <<<_HDOC
 				<td id="leftbox">
-					You are logged out!
+					<div id="logindiv">
+						<span id="loginspan">Login</span>
+						<form id="registerform" method="post" action="index.php">
+							Username:&nbsp&nbsp<input type="text" name="login_name" length="20" maxsize="32" />
+							<span id="loginpassword">	<br />Password:&nbsp&nbsp<input type="password" name="login_password" length="20" maxsize="32" />	</span>
+							<br /><input type="submit" value="Login" id="loginsubmit"/>
+						</form>
+					</div>
 				</td>
 				
 				<td id="rightbox">
@@ -60,8 +95,8 @@ echo <<<_HDOC
 			<li>
 				<a href="#statistics">Statistics</a>
 				<a href="#settings">Settings</a>
-				<a href="#logout">Logout</a>
-				<a href="#about">About</a>
+				<a href="javascript:logout()">Logout</a>
+				<a href="#about"">About</a>
 			</li>
 		</div>
 			
