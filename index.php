@@ -82,7 +82,7 @@ else{	//If logged out
 				</td>
 				
 				<td id="rightbox">
-					Register?
+					<a href="register.php">Register?</a>
 				</td>
 _HDOC;
 }
