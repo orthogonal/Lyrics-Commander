@@ -6,7 +6,8 @@ if(isset($_POST["username"]))
 	$email1 = $_POST["email1"];
 	$password = $_POST["pwd"];
 	$password1 = $_POST["pwd1"];
-	if($email == $email1 && $password == $password1)
+	
+	if($email == $email1 && $password == $password1 &&( $username!="" || $email!="" || $password!="")
 	{
 	$db_hostname = 'lyricscommander.db.8271005.hostedresource.com';
 	$db_database = 'lyricscommander';
