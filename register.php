@@ -7,7 +7,7 @@ if(isset($_POST["username"]))
 	$password = $_POST["pwd"];
 	$password1 = $_POST["pwd1"];
 //[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}    will check if email is valid once implemented	
-	if($email == $email1 && $password == $password1 &&( $username!="" || $email!="" || $password!="")
+	if($email == $email1 && $password == $password1 &&( $username!="" || $email!="" || $password!=""))
 	{
 	$db_hostname = 'lyricscommander.db.8271005.hostedresource.com';
 	$db_database = 'lyricscommander';
