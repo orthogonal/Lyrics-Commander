@@ -1,37 +1,17 @@
-
+<?php
+//Joe Adams
+//Statistics test query
+//
+?>
 <html>
 <title>Statistics Test</title>
 <link rel="stylesheet" type="text/css" href="http://lyricscommander.com/homestyle.css" />
 
 <?php
-//include("http://www.lyricscommander.com/db_login.php");
-$db_server = mysql_connect('lyricscommander.db.8271005.hostedresource.com', lyricscommander, Meral341);
-mysql_select_db(lyricscommander, $db_server); 
-
-/*$query = "SELECT * 
-			FROM Tag";
-$result = mysql_query($query) or die(mysql_error());
-
-while($row = mysql_fetch_array($result))
-  {
-  echo $row['Word'];
-  echo "<br />";
-  }*/
-   function getNumberOfSongsRated(){
-	$username = "TestUser";
-	$query = "SELECT *
-			  FROM Tags";
-	$result = mysql_query($query) or die(mysql_error());
-
-	while($row = mysql_fetch_array($result))
-	{
-	echo $row['Username'];
-	echo "<br />";
-	}
-}
-
-getNumberOfSongsRated();
-
+	//all static queries are in static_queries.php
+	include("static_queries.php");
+	//all dynamic queries are in dynamic_queries.php
+	include("dynamic_queries.php");
  ?>
  
  <head>
@@ -48,7 +28,16 @@ getNumberOfSongsRated();
 			<br />
 			<br />
 			<span id="stats">
-
+			<?php
+				$username = 'Joe';
+				getNumSongsRated($username);
+				echo "</br></br>";
+				echo "Users: </br>";
+				getUsers();
+				echo "</br>";
+				echo "Possible Tags: ";
+				getTags();
+			?>
 			</span>
 			<br />
 		</span>
