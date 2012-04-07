@@ -9,7 +9,7 @@
 				
 				var selections = new Array(20);
 				for (i = 0; i < 20; i++)
-					selections[i] = false;
+					selections[i] = 0;
 					
 				
 				$('#nextinput').submit(function(evt){		//Get a new stanza with AJAX without reloading the page
@@ -21,7 +21,15 @@
 					evt.preventDefault();
 					var clickedID = $(this).attr('id');
 					clickedID = clickedID.substring(6, clickedID.length);
-					alert(clickedID);
+					clickedID = parseInt(clickedID);
+					if (selections[clickedID - 1] == 0){
+						$(this).css('background-color', '#B6F0E2');
+						selections[clickedID - 1] = 1;
+					}
+					else{
+						$(this).css('background-color', 'white');
+						selections[clickedID - 1] = 0;
+					}
 				});
 			});
 			
@@ -106,6 +114,8 @@
 		<button id="button18" class="choices">Superior</button>
 		<button id="button19" class="choices">Thoughtful</button>
 		<button id="button20" class="choices">Touched</button>
+		<br />
+		<br />
 			<span id="lastsong">
 				Last Song:
 			</span>
@@ -128,7 +138,6 @@
 		
 		<form method="post" action="main.php" id="nextinput">
 			<div id="inputdiv">
-				<input type="text" name="emotion" size="30" maxlength="20" id="inputbox"/>
 				<input type="submit" value="Next" id="nextbutton"/>
 			</div>
 		</form>
