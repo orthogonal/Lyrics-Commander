@@ -7,6 +7,7 @@ body{
 	height: 100px;
 	width: 100%;
 	position: relative;
+	min-width: 800px;
 }
 
 #titletext{
@@ -14,6 +15,7 @@ body{
 	font-size: 4em;
 	color: white;
 	font-family: "Arial Black", Gadget, sans-serif;
+	min-width: 800px;
 }
 
 #maindiv{
@@ -84,11 +86,11 @@ body{
 }
 
 #lyricstd{
-	width: 70%;
+	width: 60%;
 }
 
 choicetd{
-	width: 30%;
+	width: 40%;
 }
 
 #lyricsdiv{
@@ -97,6 +99,7 @@ choicetd{
 	height: 400px;
 	overflow: auto;
 	padding-top: 20px;
+	min-width: 600px;
 }
 
 #choicediv{
@@ -105,7 +108,6 @@ choicetd{
 	height: 400px;
 	overflow: auto;
 	padding-top: 20px;
-	float: left;
 }
 
 #lyrics{
