@@ -25,8 +25,8 @@
 		<link rel="stylesheet" type="text/css" href="homestyle.css" />
 		<script src="_js/jquery-1.7.js"></script>
 		<script>
-			var selections 	= new Array(20);
-			var userID		= <?php echo $userid; ?>;
+			var selections 	= new Array(20);				//Selections is which button is pressed
+			var userID		= <?php echo $userid; ?>;		//Using the PHP variables from above
 			var username 	= <?php echo $username; ?>;
 			var email		= <?php echo $email; ?>;
 			var stanzaID 	= -1
@@ -34,7 +34,7 @@
 			
 			$(document).ready(function(){
 				newStanza();
-				for (i = 0; i < 20; i++)
+				for (i = 0; i < 20; i++)					//Clear all the buttons and show the first stanza when the page loads.
 					selections[i] = 0;
 					
 				
@@ -46,19 +46,19 @@
 				$('.choices').click(function(evt){
 					evt.preventDefault();
 					var clickedID = $(this).attr('id');
-					clickedID = clickedID.substring(6, clickedID.length);
-					clickedID = parseInt(clickedID);
-					if (selections[clickedID - 1] == 0){
+					clickedID = clickedID.substring(6, clickedID.length);	//The id would be "button20" so remove the button part
+					clickedID = parseInt(clickedID);						//and make it a number.
+					if (selections[clickedID - 1] == 0){					//If it wasn't selected.
 						$(this).css('background-color', '#B6F0E2');
 						selections[clickedID - 1] = 1;
 						buttonsDown++;
 					}
 					else{
-						$(this).css('background-color', 'white');
+						$(this).css('background-color', 'white');			//If it was selected
 						selections[clickedID - 1] = 0;
 						buttonsDown--;
 					}
-					if (buttonsDown == 0){
+					if (buttonsDown == 0){									//If the user hasn't selected any buttons, they can't go.
 						$("#nextbutton").attr("disabled", "disabled");
 						$("#nextbutton").css("color", "#A3A3A3");
 					}
@@ -69,7 +69,7 @@
 				});
 			});
 			
-			var count = 0;
+			var count = 0;										//count is how many stanzas the user has gone through.
 			var lastArtist = "";
 			var lastSong = "";
 			var lastAlbum = "";
@@ -85,8 +85,8 @@
 					$.post("getstanza.php", pageVals, function(data){
 						var values = data.split("&");
 						$('#lyrics').html(values[0]);
-						if (count > 0){
-							$('#artist').text(lastArtist);
+						if (count > 0){												//If count is 0, it's the initialization.
+							$('#artist').text(lastArtist);							//So we don't want to do any of this.
 							$('#song').text(lastSong);
 							$('#album').text(lastAlbum);
 							$(".choices").css("background-color", "white");
@@ -94,6 +94,7 @@
 							$(".choices").attr("disabled", "disabled");
 							$("#nextbutton").css("color", "#A3A3A3");
 							
+							//Dynamically build a multiple-tuple insertion query.
 							var tuples = 0;
 							var query = "INSERT INTO Rating(StanzaID, WordID, UserID) VALUES";
 							for (i = 0; i < 20; i++){
@@ -106,8 +107,8 @@
 										query += ", (" + tempstanzaID + ", " + wordID + ", " + userID + ")"
 								}	
 							}
-							if (tuples != 0){
-								$('#query').attr('value', query);
+							if (tuples != 0){							//Making sure there's no JavaScript games.
+								$('#query').attr('value', query);		//Store the query in a hidden form and pass it to the script.
 										query = $('#hiddentag').serialize();
 										$.post("addtag.php", query, function(data){
 											if (data != "success") 
@@ -116,7 +117,6 @@
 											buttonsDown = 0;
 								});
 							}
-							else alert("None selected");
 						}
 						lastArtist = values[4];
 						lastSong = values[1];
@@ -127,19 +127,7 @@
 						}
 					});				
 				});
-			}	
-		
-		/*	In conclusion:
-		0:  Stanza text
-		1:  Song name
-		2:  Album
-		3:  Album URL
-		4:  Artist name
-		5:  Artist URL
-		6:  Artist biography
-		Delimiter is "&"
-		Output will have "&?" in it if there is an error, followed by the error, with nothing after that.
-		*/
+			}
 		</script>
 	<head>
 	<body>
@@ -219,7 +207,7 @@
 			</li>
 		</div>
 		
-		<!-- This form holds values generated in the JavaScript functions that are passed by AJAX-->
+		<!-- These forms hold values generated in the JavaScript functions that are passed by AJAX-->
 		<form method="post" action="" id="hidden">
 			<input type="hidden" name="stanzaID" id="stanzaID" value="0" />
 		</form>
