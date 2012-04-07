@@ -13,6 +13,11 @@
 				});
 			});
 			
+			var count = 0;
+			var lastArtist = "";
+			var lastSong = "";
+			var lastAlbum = "";
+			
 			function newStanza(){
 				var maxVal = 0;
 				$.post("globals.php", function(data){
@@ -23,9 +28,15 @@
 				$.post("getstanza.php", pageVals, function(data){
 					var values = data.split("&");
 					$('#lyrics').html(values[0]);
-					$('#artist').text(values[4]);
-					$('#song').text(values[1]);
-					$('#album').text(values[2]);
+					if (count > 0){
+						$('#artist').text(lastArtist);
+						$('#song').text(lastSong);
+						$('#album').text(lastAlbum);
+						}
+					lastArtist = values[4];
+					lastSong = values[1];
+					lastAlbum = values[2];
+					count++;
 				});
 					
 						/*	In conclusion:
@@ -49,27 +60,38 @@
 			<span id="titletext">Lyrics Commander</span>
 		</div>
 		
+		<table id="maintable">
+		<tr>
+		<td id="lyricstd">
 		<div id="lyricsdiv">
-		<span id="everything">
 			<span id="lyrics">
-				Lyrics Go Here
+				
+			</span>
+		<br />
+		</div>
+		</td>
+		
+		<td id="choicetd">
+		<div id="choicediv">
+			<span id="lastsong">
+				Last Song:
 			</span>
 			<br />
-			<br />
 			<span id="artist">
-				Artist goes here
+				
 			</span>
 			<br />
 			<span id="song">
-				Song name goes here
+				
 			</span>
 			<br />
 			<span id="album">
-				Album goes here
+				
 			</span>
-		</span>
-			<br />
 		</div>
+		</td>
+		</tr>
+		</table>
 		
 		<form method="post" action="main.php" id="nextinput">
 			<div id="inputdiv">

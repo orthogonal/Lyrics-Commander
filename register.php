@@ -1,4 +1,5 @@
 <?php
+require_once("db_login.php");
 if(isset($_POST["username"]))
 {
 	$username = $_POST["username"];
@@ -9,11 +10,6 @@ if(isset($_POST["username"]))
 //[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}    will check if email is valid once implemented	
 	if($email == $email1 && $password == $password1 &&( $username!="" || $email!="" || $password!=""))
 	{
-	$db_hostname = 'lyricscommander.db.8271005.hostedresource.com';
-	$db_database = 'lyricscommander';
-	$db_username = 'lyricscommander';
-	$db_password = 'Meral341';
-
 	mysql_connect($db_hostname,$db_username, $db_password) OR DIE (mysql_error());
 	mysql_select_db($db_database) OR DIE (mysql_error());
 	$password=md5($password);
