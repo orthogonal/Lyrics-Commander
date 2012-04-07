@@ -1,22 +1,22 @@
 <?php
-require_once "db_login.php";
-$db_server = mysql_connect($db_hostname, $db_username, $db_password);
-mysql_select_db($db_database, $db_server); 
-$loggedin = false;
-$userid = -1;
-$cookieinfo = explode("%", $_COOKIE['main']);
-if ($cookieinfo[0] != null){
-	$loggedin = true;
-	$userid = $cookieinfo[0];
-}
-else{
-	$userid = 1;				//CHANGE THIS LATER TO GO BACK TO HOME IF THE USER IS NOT LOGGED IN
-}
-$query = "SELECT * FROM User WHERE UserID = $userid";
-$result = mysql_query($query) or DIE(mysql_error());
-$row = mysql_fetch_row($result);
-$username = "'" . $row[1] . "'";
-$email = "'" . $row[3] . "'";
+	require_once "db_login.php";
+	$db_server = mysql_connect($db_hostname, $db_username, $db_password);
+	mysql_select_db($db_database, $db_server); 
+	$loggedin = false;
+	$userid = -1;
+	$cookieinfo = explode("%", $_COOKIE['main']);
+	if ($cookieinfo[0] != null){
+		$loggedin = true;
+		$userid = $cookieinfo[0];
+	}
+	else{
+		$userid = 1;				//CHANGE THIS LATER TO GO BACK TO HOME IF THE USER IS NOT LOGGED IN
+	}
+	$query = "SELECT * FROM User WHERE UserID = $userid";
+	$result = mysql_query($query) or DIE(mysql_error());
+	$row = mysql_fetch_row($result);
+	$username = "'" . $row[1] . "'";
+	$email = "'" . $row[3] . "'";
 ?>
 
 <html>
@@ -26,11 +26,13 @@ $email = "'" . $row[3] . "'";
 		<script src="_js/jquery-1.7.js"></script>
 		<script>
 			var selections 	= new Array(20);
-			var userid		= <?php echo $userid; ?>;
+			var userID		= <?php echo $userid; ?>;
 			var username 	= <?php echo $username; ?>;
 			var email		= <?php echo $email; ?>;
+			var stanzaID 	= -1
+			var buttonsDown	= 0
+			
 			$(document).ready(function(){
-				alert(userid + " " + username + " " + email);
 				newStanza();
 				for (i = 0; i < 20; i++)
 					selections[i] = 0;
@@ -49,10 +51,20 @@ $email = "'" . $row[3] . "'";
 					if (selections[clickedID - 1] == 0){
 						$(this).css('background-color', '#B6F0E2');
 						selections[clickedID - 1] = 1;
+						buttonsDown++;
 					}
 					else{
 						$(this).css('background-color', 'white');
 						selections[clickedID - 1] = 0;
+						buttonsDown--;
+					}
+					if (buttonsDown == 0){
+						$("#nextbutton").attr("disabled", "disabled");
+						$("#nextbutton").css("color", "#A3A3A3");
+					}
+					else if (buttonsDown == 1){
+						$("#nextbutton").removeAttr("disabled");
+						$("#nextbutton").css("color", "#000000");
 					}
 				});
 			});
@@ -65,8 +77,9 @@ $email = "'" . $row[3] . "'";
 			function newStanza(){
 				var maxVal = 0;
 				$.post("globals.php", function(data){
-					maxVal = parseInt(data)										//AJAX call to globals page, this will need to be updated once there are multiple globals.
-					var stanzaID = (Math.floor(Math.random() * maxVal) + 1)			//Get a number from 0 to (maxVal - 1) and add 1, so it's from 1 to maxVal (a random stanzaID)
+					maxVal = parseInt(data);										//AJAX call to globals page, this will need to be updated once there are multiple globals.
+					tempstanzaID = stanzaID;
+					stanzaID = (Math.floor(Math.random() * maxVal) + 1);			//Get a number from 0 to (maxVal - 1) and add 1, so it's from 1 to maxVal (a random stanzaID)
 					$('#stanzaID').attr('value', stanzaID);							//Store the stanzaID in a hidden form field
 					var pageVals = $('#hidden').serialize();						//Serialize the form so that it can be passed via AJAX.
 					$.post("getstanza.php", pageVals, function(data){
@@ -81,6 +94,29 @@ $email = "'" . $row[3] . "'";
 							$(".choices").attr("disabled", "disabled");
 							$("#nextbutton").css("color", "#A3A3A3");
 							
+							var tuples = 0;
+							var query = "INSERT INTO Rating(StanzaID, WordID, UserID) VALUES";
+							for (i = 0; i < 20; i++){
+								if (selections[i] == 1){
+									var wordID = i + 1
+									tuples++;	
+									if (tuples == 1)
+										query += "(" + tempstanzaID + ", " + wordID + ", " + userID + ")"
+									else
+										query += ", (" + tempstanzaID + ", " + wordID + ", " + userID + ")"
+								}	
+							}
+							if (tuples != 0){
+								$('#query').attr('value', query);
+										query = $('#hiddentag').serialize();
+										$.post("addtag.php", query, function(data){
+											if (data != "success") 
+												alert("There has been an error, please e-mail admin@lyricscommander.com\n" + data);
+											$(".choices").removeAttr("disabled");
+											buttonsDown = 0;
+								});
+							}
+							else alert("None selected");
 						}
 						lastArtist = values[4];
 						lastSong = values[1];
@@ -148,7 +184,7 @@ $email = "'" . $row[3] . "'";
 		<br />
 		<br />
 			<form method="post" action="main.php" id="nextinput">
-					<input type="submit" value="Next" id="nextbutton"/>
+					<input type="submit" value="Next" disabled="disabled" id="nextbutton"/>
 			</form>
 			<br />
 			<br />
@@ -186,6 +222,10 @@ $email = "'" . $row[3] . "'";
 		<!-- This form holds values generated in the JavaScript functions that are passed by AJAX-->
 		<form method="post" action="" id="hidden">
 			<input type="hidden" name="stanzaID" id="stanzaID" value="0" />
+		</form>
+		
+		<form method="post" action="" id="hiddentag">
+			<input type="hidden" name="query" id="query" value="" />
 		</form>
 		
 	</body>
