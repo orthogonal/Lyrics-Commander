@@ -4,10 +4,9 @@
 		<link rel="stylesheet" type="text/css" href="homestyle.css" />
 		<script src="_js/jquery-1.7.js"></script>
 		<script>
+			var selections = new Array(20);
 			$(document).ready(function(){
 				newStanza();
-				
-				var selections = new Array(20);
 				for (i = 0; i < 20; i++)
 					selections[i] = 0;
 					
@@ -57,6 +56,10 @@
 					lastSong = values[1];
 					lastAlbum = values[2];
 					count++;
+					for (i = 0; i < 20; i++){
+						selections[i] = 0;
+					}
+					$(".choices").css("background-color", "white");
 				});
 					
 						/*	In conclusion:
@@ -116,6 +119,13 @@
 		<button id="button20" class="choices">Touched</button>
 		<br />
 		<br />
+			<form method="post" action="main.php" id="nextinput">
+					<input type="submit" value="Next" id="nextbutton"/>
+			</form>
+			<br />
+			<br />
+			<br />
+			<br />
 			<span id="lastsong">
 				Last Song:
 			</span>
@@ -135,12 +145,6 @@
 		</td>
 		</tr>
 		</table>
-		
-		<form method="post" action="main.php" id="nextinput">
-			<div id="inputdiv">
-				<input type="submit" value="Next" id="nextbutton"/>
-			</div>
-		</form>
 		
 		<div id="bottombar">
 			<li>
