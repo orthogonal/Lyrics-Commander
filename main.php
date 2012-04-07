@@ -7,9 +7,21 @@
 			$(document).ready(function(){
 				newStanza();
 				
+				var selections = new Array(20);
+				for (i = 0; i < 20; i++)
+					selections[i] = false;
+					
+				
 				$('#nextinput').submit(function(evt){		//Get a new stanza with AJAX without reloading the page
 					evt.preventDefault();					//Right now, this doesn't write ratings to the database
 					newStanza();
+				});
+				
+				$('.choices').click(function(evt){
+					evt.preventDefault();
+					var clickedID = $(this).attr('id');
+					clickedID = clickedID.substring(6, clickedID.length);
+					alert(clickedID);
 				});
 			});
 			
@@ -73,6 +85,27 @@
 		
 		<td id="choicetd">
 		<div id="choicediv">
+		
+		<button id="button1" class="choices">Amused</button>
+		<button id="button2" class="choices">Angry</button>
+		<button id="button3" class="choices">Concerned</button>
+		<button id="button4" class="choices">Confident</button>
+		<button id="button5" class="choices">Cynical</button>
+		<button id="button6" class="choices">Depressed</button>
+		<button id="button7" class="choices">Energetic</button>
+		<button id="button8" class="choices">Frustrated</button>
+		<button id="button9" class="choices">Happy</button>
+		<button id="button10" class="choices">Inspired</button>
+		<button id="button11" class="choices">Jealous</button>
+		<button id="button12" class="choices">Lonely</button>
+		<button id="button13" class="choices">Optimistic</button>
+		<button id="button14" class="choices">Relaxed</button>
+		<button id="button15" class="choices">Restless</button>
+		<button id="button16" class="choices">Sad</button>
+		<button id="button17" class="choices">Solemn</button>
+		<button id="button18" class="choices">Superior</button>
+		<button id="button19" class="choices">Thoughtful</button>
+		<button id="button20" class="choices">Touched</button>
 			<span id="lastsong">
 				Last Song:
 			</span>
