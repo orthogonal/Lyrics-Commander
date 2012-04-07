@@ -1,11 +1,36 @@
+<?php
+require_once "db_login.php";
+$db_server = mysql_connect($db_hostname, $db_username, $db_password);
+mysql_select_db($db_database, $db_server); 
+$loggedin = false;
+$userid = -1;
+$cookieinfo = explode("%", $_COOKIE['main']);
+if ($cookieinfo[0] != null){
+	$loggedin = true;
+	$userid = $cookieinfo[0];
+}
+else{
+	$userid = 1;				//CHANGE THIS LATER TO GO BACK TO HOME IF THE USER IS NOT LOGGED IN
+}
+$query = "SELECT * FROM User WHERE UserID = $userid";
+$result = mysql_query($query) or DIE(mysql_error());
+$row = mysql_fetch_row($result);
+$username = "'" . $row[1] . "'";
+$email = "'" . $row[3] . "'";
+?>
+
 <html>
 	<head>
 		<title>Lyrics Commander</title>
 		<link rel="stylesheet" type="text/css" href="homestyle.css" />
 		<script src="_js/jquery-1.7.js"></script>
 		<script>
-			var selections = new Array(20);
+			var selections 	= new Array(20);
+			var userid		= <?php echo $userid; ?>;
+			var username 	= <?php echo $username; ?>;
+			var email		= <?php echo $email; ?>;
 			$(document).ready(function(){
+				alert(userid + " " + username + " " + email);
 				newStanza();
 				for (i = 0; i < 20; i++)
 					selections[i] = 0;
@@ -40,29 +65,35 @@
 			function newStanza(){
 				var maxVal = 0;
 				$.post("globals.php", function(data){
-				maxVal = parseInt(data)												//AJAX call to globals page, this will need to be updated once there are multiple globals.
-				var stanzaID = (Math.floor(Math.random() * maxVal) + 1)				//Get a number from 0 to (maxVal - 1) and add 1, so it's from 1 to maxVal (a random stanzaID)
-				$('#stanzaID').attr('value', stanzaID);								//Store the stanzaID in a hidden form field
-				var pageVals = $('#hidden').serialize();							//Serialize the form so that it can be passed via AJAX.
-				$.post("getstanza.php", pageVals, function(data){
-					var values = data.split("&");
-					$('#lyrics').html(values[0]);
-					if (count > 0){
-						$('#artist').text(lastArtist);
-						$('#song').text(lastSong);
-						$('#album').text(lastAlbum);
+					maxVal = parseInt(data)										//AJAX call to globals page, this will need to be updated once there are multiple globals.
+					var stanzaID = (Math.floor(Math.random() * maxVal) + 1)			//Get a number from 0 to (maxVal - 1) and add 1, so it's from 1 to maxVal (a random stanzaID)
+					$('#stanzaID').attr('value', stanzaID);							//Store the stanzaID in a hidden form field
+					var pageVals = $('#hidden').serialize();						//Serialize the form so that it can be passed via AJAX.
+					$.post("getstanza.php", pageVals, function(data){
+						var values = data.split("&");
+						$('#lyrics').html(values[0]);
+						if (count > 0){
+							$('#artist').text(lastArtist);
+							$('#song').text(lastSong);
+							$('#album').text(lastAlbum);
+							$(".choices").css("background-color", "white");
+							$("#nextbutton").attr("disabled", "disabled");
+							$(".choices").attr("disabled", "disabled");
+							$("#nextbutton").css("color", "#A3A3A3");
+							
 						}
-					lastArtist = values[4];
-					lastSong = values[1];
-					lastAlbum = values[2];
-					count++;
-					for (i = 0; i < 20; i++){
-						selections[i] = 0;
-					}
-					$(".choices").css("background-color", "white");
+						lastArtist = values[4];
+						lastSong = values[1];
+						lastAlbum = values[2];
+						count++;
+						for (i = 0; i < 20; i++){
+							selections[i] = 0;
+						}
+					});				
 				});
-					
-						/*	In conclusion:
+			}	
+		
+		/*	In conclusion:
 		0:  Stanza text
 		1:  Song name
 		2:  Album
@@ -73,9 +104,6 @@
 		Delimiter is "&"
 		Output will have "&?" in it if there is an error, followed by the error, with nothing after that.
 		*/
-				});
-				
-			}
 		</script>
 	<head>
 	<body>
