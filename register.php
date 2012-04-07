@@ -39,7 +39,7 @@
 			
 			//strlen($password>3 && 
 
-			if(strlen($password)<31 && strlen($email<127) && strlen(username)<31 && strlen($password)>3 && preg_match('[A-Z0-9._%\+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}', $email) == true && $email == $email1 && $password == $password1 &&( $username!="" || $email!="" || $password!=""))
+			if(strlen($password)<31 && strlen($email<127) && strlen(username)<31 && strlen($password)>3 && preg_match('^"[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)?*(\.[a-z]{2,3})$"^', $email) == true && $email == $email1 && $password == $password1 &&( $username!="" || $email!="" || $password!=""))
 			{
 			mysql_connect($db_hostname,$db_userna7me, $db_password) OR DIE (mysql_error());
 			mysql_select_db($db_database) OR DIE (mysql_error());
@@ -59,7 +59,7 @@
 				if (strlen($username)>=31){
 				print("ERROR username has too many characters");
 				}
-				if (preg_match('[A-Z0-9._%\+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}', $email) == false){
+				if (preg_match('^"[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)?*(\.[a-z]{2,3})$"^', $email) == false){
 				print("ERROR please enter a valid email address");
 				}
 				if ($email == $email1){
