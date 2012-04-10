@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="http://lyricscommander.com/homestyle.css" />
 
 <?php
+	$username = 'Joe';
 	//all static queries are in static_queries.php
 	include("static_queries.php");
 	//all dynamic queries are in dynamic_queries.php
@@ -19,30 +20,22 @@
 		<div id="titlebar">
 			<span id="titletext">Lyrics Commander Statistics</span>
 		</div>
-		
-		<div id="lyricsdiv">
-		<span id="everything">
-			<span id="ProfileName">
-				Profile Name goes here
-			</span>
-			<br />
-			<br />
-			<span id="stats">
-			<?php
-				$username = 'Joe';
-				getNumSongsRated($username);
-				echo "</br></br>";
-				echo "Users: </br>";
-				getUsers();
-				echo "</br>";
-				echo "Possible Tags: ";
-				getTags();
-			?>
-			</span>
-			<br />
+	<span id="everything">
+		<span id="ProfileName">
+			<?php echo "<h1>Profile: " . $username . "</h1>"; ?>
 		</span>
-			<br />
-		</div>
+		<span id="stats">
+		<?php
+			$num = 4;
+			$username = 'Joe';
+			getNumSongsRated($username);
+			echo "</br> </br> </br>";
+			include("dynamic_section.php");
+		?>
+		</span>
+		<br />
+	</span>
+		<br />
 		
 		
 		<div id="bottombar">

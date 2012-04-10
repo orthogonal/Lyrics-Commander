@@ -7,19 +7,20 @@
 		$query = "SELECT * 
 					FROM Tag";
 		$result = mysql_query($query) or die(mysql_error());
-
+		echo "<b>";
 		while($row = mysql_fetch_array($result))
 		{
 		echo $row['Word'];
 		echo ", ";
 		}
+		echo "</b>";
 	}
 	
 	function getUsers(){
 		$query = "SELECT * 
 					FROM User";
 		$result = mysql_query($query) or die(mysql_error());
-		echo "<table border='1' font-size: 2em;>
+		echo "<table border='0' font-size: 2em;>
 		<tr>
 		<th>Username</th>
 		<th>UserID</th>
