@@ -35,20 +35,20 @@ body{
 	font-size: 2.8em;
 	font-weight: 800;
 	color: rgb(237, 237, 237);
-background-image: linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
-background-image: -o-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
-background-image: -moz-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
-background-image: -webkit-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
-background-image: -ms-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+	background-image: linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+	background-image: -o-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+	background-image: -moz-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+	background-image: -webkit-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+	background-image: -ms-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
 
-background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.06, rgb(199,199,199)),
-	color-stop(0.34, rgb(224,224,224)),
-	color-stop(0.95, rgb(237,237,237))
-);
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.06, rgb(199,199,199)),
+		color-stop(0.34, rgb(224,224,224)),
+		color-stop(0.95, rgb(237,237,237))
+	);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	font-family: Georgia, sans-serif;
@@ -83,4 +83,29 @@ background-image: -webkit-gradient(
 	min-width: 100%;
 	margin: 5px;
 	text-align: center;
+}
+
+#left{
+	width: 50%;
+}
+
+#right{
+	width: 50%;
+}
+
+.registerfield{
+	font-size: 2em;
+	font-family: Georgia, sans-serif;
+	border-radius: 12px;
+	width: 350px;
+	outline: none;
+	padding-left: 3px;
+}
+
+#submit_register{
+	width: 350px;
+	font-size: 2em;
+	font-family: sans-serif;
+	border-radius: 25px;
+	background-color: white;
 }
