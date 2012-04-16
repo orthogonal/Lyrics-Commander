@@ -82,17 +82,23 @@ body{
 	width: 100%;
 	min-width: 100%;
 	margin: 5px;
-	text-align: center;
 }
 
 #left{
 	width: 50%;
+	text-align: center;
 }
 
 #right{
 	width: 50%;
 }
 
+#join{
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 3em;
+}
+	
 .registerfield{
 	font-size: 2em;
 	font-family: Georgia, sans-serif;
@@ -108,4 +114,19 @@ body{
 	font-family: sans-serif;
 	border-radius: 25px;
 	background-color: white;
+}
+
+#alreadymember{
+	font-size: 1.8em;
+	position: relative;
+	top: 50px;
+	padding-top: 25px;
+	padding-left: 25px;
+	width: 100%;
+}
+
+#description{
+	text-align: left;
+	font-size: 1.4em;
+	font-family: Georgia, sans-serif;
 }
