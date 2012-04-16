@@ -8,6 +8,8 @@ body{
 	width: 100%;
 	position: relative;
 	min-width: 800px;
+	background-color: #217A17;
+	border-bottom: white 1px solid white;
 }
 
 #titletext{
