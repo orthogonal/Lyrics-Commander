@@ -1,0 +1,86 @@
+body{
+	background-color:  #F1F0F0;
+	width: 100%;
+	height: 100%;
+}
+
+#titlebar{
+	height: 60px;
+	width: 100%;
+	position: absolute;
+	min-width: 800px;
+	background-color: rgb(76, 135, 77);
+	border-bottom: 1px solid #E0E0E0;
+	left: 0;
+	top: 0;
+	background-image: linear-gradient(bottom, rgb(76,135,77) 74%, rgb(56,87,57) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(76,135,77) 74%, rgb(56,87,57) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(76,135,77) 74%, rgb(56,87,57) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(76,135,77) 74%, rgb(56,87,57) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(76,135,77) 74%, rgb(56,87,57) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.74, rgb(76,135,77)),
+		color-stop(1, rgb(56,87,57))
+	);
+}
+
+#titletext{
+	margin-left: 25px;
+	margin-top: 5px;
+	position: absolute;
+	font-size: 2.8em;
+	font-weight: 800;
+	color: rgb(237, 237, 237);
+background-image: linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+background-image: -o-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+background-image: -moz-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+background-image: -webkit-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+background-image: -ms-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.06, rgb(199,199,199)),
+	color-stop(0.34, rgb(224,224,224)),
+	color-stop(0.95, rgb(237,237,237))
+);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-family: Georgia, sans-serif;
+	min-width: 800px;
+}
+
+#containerdiv{
+	position: absolute;
+	top: 60px;
+	left: 0;
+	width: 100%;
+}
+
+#centerdiv{
+	position: relative;
+	width: 920px;
+	min-width: 920px;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-top-right-radius: 20px;
+	border-top-left-radius: 20px;
+	background-image:  url("divbg2.png");
+	border: 1px solid #E0E0E0;
+	}
+	
+#centertable{
+	width: 100%;
+	min-width: 100%;
+	margin: 5px;
+	text-align: center;
+}
