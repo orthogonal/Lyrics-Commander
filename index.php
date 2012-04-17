@@ -2,13 +2,22 @@
 	require_once("db_login.php");
 	mysql_connect($db_hostname,$db_username, $db_password) OR DIE (mysql_error());
 	mysql_select_db($db_database) or die(mysql_error());
-	
+
+/*=======================================================*/
+/*==        Check if the user is registering.  		   ==*/
+/*== If they are, the username field will have a value.==*/
+/*=======================================================*/
 	if(isset($_POST["username"]))
 	{
 		$username = $_POST["username"];
 		$email = $_POST["email"];
 		$password = $_POST["password"];
-
+		
+/*==============================================================================================*/	
+/*==	If the fields the user has put in are valid, then insert the name into the database.  ==*/
+/*==	We don't need to check if the name already exists, because that's done on the page.   ==*/
+/*==============================================================================================*/
+	
 		if(strlen($password)<31 && strlen($email<127) && strlen(username)<31 
 			/*&& preg_match('^"[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)?*(\.[a-z]{2,3})$"^', $email) == true */
 			&& $username != "" && $email != "" && $password != ""){
@@ -39,6 +48,10 @@
 	$cookieinfo = explode("%", $_COOKIE['main']);
 	if ($cookieinfo[0] != "")
 		$loggedin = true;
+/*=======================================================*/
+/*==		The contents of the "main" cookie are:	   ==*/
+/*==		0:  User id								   ==*/
+/*=======================================================*/
 ?>
 		
 <!DOCTYPE html>
@@ -48,6 +61,11 @@
 			<link rel="stylesheet" type="text/css" href="indexstyle.css" />
 				<script src="_js/jquery-1.7.js"></script>
 				<script>
+				
+/*================================================================================*/
+/*== Make the register fields say "Username", etc. when there's nothing in them ==*/
+/*================================================================================*/
+				
 					$(document).ready(function(){
 						$(".registerfield, .loginfield").focus(function(){
 							if ($(this).val() == $(this).attr('title')){
@@ -63,6 +81,10 @@
 						});
 						$(".registerfield, .loginfield").blur();
 						
+/*=======================================================*/
+/*==	  The Logout Button and its functionality	   ==*/
+/*=======================================================*/
+						
 						$("#logouttext").click(function(evt){
 							evt.preventDefault();
 							$.post("logout.php", function(data){
@@ -77,6 +99,12 @@
 							$("#logouttext").css("color", "white");
 							$("#logouttext").css("font-weight", 400);
 						});
+
+/*================================================================================*/
+/*==				The JavaScript code for the registration form.   	    	==*/
+/*==  			First, it checks if all the fields have valid lengths.  		==*/
+/*==   Then it does an AJAX call first to see if the username already exists.	==*/
+/*================================================================================*/
 						
 						$("#registerform").submit(function(evt){
 							var username = $('#username').val();
@@ -113,6 +141,10 @@
 							}
 						});
 						
+/*========================================================================*/
+/*	The JavaScript code for logging in.  This is all AJAX pretty much.	==*/
+/*========================================================================*/
+						
 						$('#loginform').submit(function(evt){
 							evt.preventDefault();
 							var username = $('#login_username').val();
@@ -135,6 +167,11 @@
 								$('.loginfield').removeAttr("disabled");
 							}
 						});
+						
+/*==============================================================================*/
+/*== This part makes sure the login form is always in the center of the page. ==*/
+/*== 	It also makes the background black when it appears (using sheet).	  ==*/
+/*==============================================================================*/						
 						
 						$('#loginform').css("top", (($(window).height() / 2) - 100));
 						$('#loginform').css("left", (($(window).width() / 2) - 250));

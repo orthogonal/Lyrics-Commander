@@ -4,13 +4,17 @@ body{
 	height: 100%;
 }
 
+/*========================================================*/
+/*	The stuff at the top of the page (the title bar).	==*/
+/*========================================================*/
+
 #titlebar{
 	height: 60px;
 	width: 100%;
 	position: absolute;
 	min-width: 800px;
 	background-color: rgb(76, 135, 77);
-	border-bottom: 1px solid #E0E0E0;
+	border-bottom: 1px solid white;
 	left: 0;
 	top: 0;
 	background-image: linear-gradient(bottom, rgb(76,135,77) 74%, rgb(56,87,57) 100%);
@@ -64,6 +68,10 @@ body{
 	text-decoration: none;
 }
 
+/*====================================================================*/
+/*	The basic structure of the stuff in the middle of the page. 	==*/
+/*====================================================================*/
+
 #containerdiv{
 	position: absolute;
 	top: 60px;
@@ -101,6 +109,10 @@ body{
 #right{
 	width: 50%;
 }
+
+/*==========================================================================*/
+/*	Everything having to do with the left side of the div for new users.  ==*/
+/*==========================================================================*/
 
 #join{
 	margin-left: auto;
@@ -145,11 +157,19 @@ body{
 	border-radius: 25px;
 }
 
+/*============================================================================*/
+/*	Everything having to do with the right side of the div for new users.	==*/
+/*============================================================================*/
+
 #description{
 	text-align: left;
 	font-size: 1.4em;
 	font-family: Georgia, sans-serif;
 }
+
+/*================================================*/
+/*	Everything having to do with logging in.	==*/
+/*================================================*/
 
 #loginform{
 	width: 500px;
