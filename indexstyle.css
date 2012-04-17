@@ -130,3 +130,63 @@ body{
 	font-size: 1.4em;
 	font-family: Georgia, sans-serif;
 }
+
+#loginform{
+	width: 500px;
+	height: 200px;
+	border: 3px solid black;
+	background-color: rgb(237, 237, 237);
+	background-image: linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+	background-image: -o-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+	background-image: -moz-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+	background-image: -webkit-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+	background-image: -ms-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.06, rgb(199,199,199)),
+		color-stop(0.34, rgb(224,224,224)),
+		color-stop(0.95, rgb(237,237,237))
+	);
+	border-radius: 15px;
+	position: fixed;
+	top: 200px;
+	left: 200px;
+	visibility: hidden;
+	z-index: 5;
+}
+
+#sheet{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: .5;
+	visibility: hidden;
+	z-index: 4;
+}
+
+.loginfield{
+	outline: none;
+	font-size: 1.4em;
+	font-family: sans-serif;
+	border-radius: 8px;
+	width: 300px;
+	padding-left: 3px;
+	margin-left: 100px;
+	position: relative;
+	top: 30px;
+}
+
+#submit_login{
+	font-size: 1.4em;
+	font-family: Georgia, sans-serif;
+	border-radius: 15px;
+	width: 300px;
+	margin-left: 100px;
+	position: relative;
+	top: 30px;
+}

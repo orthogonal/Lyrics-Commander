@@ -12,7 +12,7 @@
 		if(strlen($password)<31 && strlen($email<127) && strlen(username)<31 
 			/*&& preg_match('^"[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)?*(\.[a-z]{2,3})$"^', $email) == true */
 			&& $username != "" && $email != "" && $password != ""){
-			$password=md5($password);
+			$password = md5($password);
 			$query =  "INSERT INTO User (Username, Email, Password) VALUES ('$username', '$email', '$password')";
 			$result = mysql_query($query) or die(mysql_error());
 		}
@@ -34,6 +34,11 @@
 				die("ERROR You did not enter in an e-mail address");
 		}
 	}
+	
+	$loggedin = false;
+	$cookieinfo = explode("%", $_COOKIE['main']);
+	if ($cookieinfo[0] != null)
+		$loggedin = true;
 ?>
 		
 <!DOCTYPE html>
@@ -44,19 +49,19 @@
 				<script src="_js/jquery-1.7.js"></script>
 				<script>
 					$(document).ready(function(){
-						$(".registerfield").focus(function(){
+						$(".registerfield, .loginfield").focus(function(){
 							if ($(this).val() == $(this).attr('title')){
 								$(this).css('color', 'black');
 								$(this).val("");
 							}
 						});
-						$(".registerfield").blur(function(){
+						$(".registerfield, .loginfield").blur(function(){
 							if ($(this).val() == ""){
 								$(this).css('color', '#E0E0E0');
 								$(this).val($(this).attr('title'));
 							}
 						});
-						$(".registerfield").blur();
+						$(".registerfield, .loginfield").blur();
 						
 						$("#registerform").submit(function(evt){
 							var username = $('#username').val();
@@ -91,6 +96,49 @@
 								if (email.length == 0) alert("Please enter an e-mail address");
 								evt.preventDefault();
 							}
+						});
+						
+						$('#loginform').submit(function(evt){
+							evt.preventDefault();
+							var username = $('#login_username').val();
+							var password = $('#login_password').val();
+							
+							if ((0 < username.length <= 31) && (0 < password.length <= 31)){
+								var information = "username='" + username + "'&password='" + password + "'";
+								$('#submit_login').attr("disabled", "disabled");
+								$('.loginfield').attr("disabled", "disabled");
+								$.post("login.php", information, function(data){
+									if (data == "username")
+										alert("Invalid Username");
+									else if (data == "password")
+										alert("Incorrect Password");
+									else if (data == "success")
+										location.reload(true);
+									else alert(data + "\nContact acl68@case.edu");
+								});
+								$('#submit_login').removeAttr("disabled");
+								$('.loginfield').removeAttr("disabled");
+							}
+						});
+						
+						$('#loginform').css("top", (($(window).height() / 2) - 100));
+						$('#loginform').css("left", (($(window).width() / 2) - 250));
+						
+						$(window).resize(function(){						
+							$('#loginform').css("top", (($(window).height() / 2) - 100));
+							$('#loginform').css("left", (($(window).width() / 2) - 250));
+						});
+						
+						$('#login_button').click(function(){
+							$('#sheet').css("visibility", "visible");
+							$('#loginform').css("visibility", "visible");
+							$('#sheet').show();
+							$('#loginform').show();
+						});
+						
+						$('#sheet').click(function(){
+							$('#sheet').fadeOut(200);
+							$('#loginform').fadeOut(200);
 						});
 					});
 				</script>
@@ -128,5 +176,13 @@
 				</table>
 			</div>
 		</div>
+		<div id="loginform">
+			<form id="loggingin" method="post" action="index2.php">
+				<input type="text" name="login_username" id="login_username" class="loginfield" maxlength="31" width="20" title="Username" />
+				<br /><input type="password" name="login_password" id="login_password" class="loginfield" maxlength="31" width="20" title="Password" />
+				<br /><input type="submit" name="submit_login" id="submit_login" value="Login" />
+			</form>
+		</div>
+		<div id="sheet"></div>
 	</body>
 </html>
