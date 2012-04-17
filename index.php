@@ -186,6 +186,7 @@
 							$('#loginform').css("visibility", "visible");
 							$('#sheet').show();
 							$('#loginform').show();
+							$('#login_username').focus();
 						});
 						
 						$('#sheet').click(function(){
