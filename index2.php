@@ -169,7 +169,9 @@
 		<div id="containerdiv">
 			<div id="centerdiv">
 				<table id="centertable">
-					<tr>
+					<tr>			
+					<?php
+						if (!$loggedin) echo <<<_HDOC
 						<td id="left">
 							<span id="join">Join The Party!</span>
 							<form id="registerform" method="post" action="index2.php">
@@ -191,8 +193,18 @@
 								a rich collection of fascinating information about your musical tastes, which you can use
 								to compare yourself to your friends and other users.  <br />Lyrics Commander is a fun way to 
 								discover new bands, interact with music and learn about yourself.
-							<span>
+							</span>
 						</td>
+_HDOC;
+						else echo <<<_HDOC
+						<td id="left">
+							<a href="main.php">Go</a>
+						</td>
+						<td id="right">
+							<a href="stats.php">Numbers</a>
+						</td>
+_HDOC;
+?>
 					</tr>
 				</table>
 			</div>
