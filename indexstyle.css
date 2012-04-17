@@ -55,6 +55,16 @@ body{
 	min-width: 800px;
 }
 
+#logouttext{
+	margin-left: 94%;
+	font-size: 1.4em;
+	font-weight: 400;
+	color: white;
+	position: relative;
+	top: 15px;
+	text-decoration: none;
+}
+
 #containerdiv{
 	position: absolute;
 	top: 60px;
@@ -116,13 +126,24 @@ body{
 	background-color: white;
 }
 
-#alreadymember{
-	font-size: 1.8em;
+#already_div{
 	position: relative;
 	top: 50px;
-	padding-top: 25px;
-	padding-left: 25px;
+	text-align: center;
+}
+
+#alreadymember{
+	font-size: 1.8em;
+	font-family: Georgia, sans-serif;
 	width: 100%;
+}
+
+#login_button{
+	font-size: 1.8em;
+	font-family: sans-serif;
+	width: 300px;
+	background-color: white;
+	border-radius: 25px;
 }
 
 #description{

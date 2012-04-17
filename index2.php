@@ -37,7 +37,7 @@
 	
 	$loggedin = false;
 	$cookieinfo = explode("%", $_COOKIE['main']);
-	if ($cookieinfo[0] != null)
+	if ($cookieinfo[0] != "")
 		$loggedin = true;
 ?>
 		
@@ -62,6 +62,21 @@
 							}
 						});
 						$(".registerfield, .loginfield").blur();
+						
+						$("#logouttext").click(function(evt){
+							evt.preventDefault();
+							$.post("logout.php", function(data){
+								location.reload(true);
+							});
+						});
+						
+						$("#logouttext").hover(function(){
+							$("#logouttext").css("color", "blue");
+							$("#logouttext").css("font-weight", 700);
+						}, function(){
+							$("#logouttext").css("color", "white");
+							$("#logouttext").css("font-weight", 400);
+						});
 						
 						$("#registerform").submit(function(evt){
 							var username = $('#username').val();
@@ -146,6 +161,9 @@
 	<body>
 		<div id="titlebar">
 			<span id="titletext">Lyrics Commander</span>
+			<?php
+				if ($loggedin) echo "<a href='' id='logouttext'>Logout</a>";
+			?>
 		</div>
 		
 		<div id="containerdiv">
@@ -161,7 +179,10 @@
 								<br /><input type="submit" name="submit_register" id="submit_register" value="Submit" />
 							</form>
 							
-							<span id="alreadymember">Already have an account?  <button id="login_button">Login</button></span>
+							<div id="already_div">
+								<span id="alreadymember">Already have an account?</span>
+								<button id="login_button">Login</button>
+							</div>
 						</td>
 						<td id="right">
 							<span id="description">
