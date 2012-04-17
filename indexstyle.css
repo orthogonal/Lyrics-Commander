@@ -34,20 +34,19 @@ body{
 	position: absolute;
 	font-size: 2.8em;
 	font-weight: 800;
-	color: rgb(237, 237, 237);
-	background-image: linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
-	background-image: -o-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
-	background-image: -moz-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
-	background-image: -webkit-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
-	background-image: -ms-linear-gradient(bottom, rgb(199,199,199) 6%, rgb(224,224,224) 34%, rgb(237,237,237) 95%);
-
+	color: black;
+	background-image: linear-gradient(bottom, rgb(184,184,184) 47%, rgb(224,224,224) 61%, rgb(250,250,250) 81%);
+	background-image: -o-linear-gradient(bottom, rgb(184,184,184) 47%, rgb(224,224,224) 61%, rgb(250,250,250) 81%);
+	background-image: -moz-linear-gradient(bottom, rgb(184,184,184) 47%, rgb(224,224,224) 61%, rgb(250,250,250) 81%);
+	background-image: -webkit-linear-gradient(bottom, rgb(184,184,184) 47%, rgb(224,224,224) 61%, rgb(250,250,250) 81%);
+	background-image: -ms-linear-gradient(bottom, rgb(184,184,184) 47%, rgb(224,224,224) 61%, rgb(250,250,250) 81%);
 	background-image: -webkit-gradient(
 		linear,
 		left bottom,
 		left top,
-		color-stop(0.06, rgb(199,199,199)),
-		color-stop(0.34, rgb(224,224,224)),
-		color-stop(0.95, rgb(237,237,237))
+		color-stop(0.47, rgb(184,184,184)),
+		color-stop(0.61, rgb(224,224,224)),
+		color-stop(0.81, rgb(250,250,250))
 	);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
