@@ -76,7 +76,18 @@ foreach($artists as $artist)
 		if(($row = mysql_fetch_array($result)) == false)//insert album if not inserted
 		{
 			$coverURL = "";
-			//still need to run a last.fm query to get the album cover url
+			$xml3 = new SimpleXMLElement(file_get_contents("http://ws.audioscrobbler.com/2.0/?method=album.search&api_key=$key&album=" . str_replace(" ", "%20", $albumTitle)));
+			foreach($xml3->results->albummatches->album as $albumExtra)
+			{
+				if($albumExtra->name == $albumTitle && $albumExtra->artist == $artist)
+				{
+					foreach($albumExtra->image as $i)
+					{
+						$coverURL = $i;
+					}//want to assign last $i to $image... can't just access it like an array
+					break;
+				}
+			}
 			
 			$query =  	"INSERT INTO Album (Name, CoverURL)
 						VALUES ('$albumTitle', '$coverURL')";
@@ -101,6 +112,8 @@ foreach($artists as $artist)
 						VALUES ($albumID, $artistID, '$trackName')";
 			print "$query<hr>";
 			$result = mysql_query($query) OR DIE (mysql_error());
+			
+			//TODO: fetch lyrics and insert into DB
 		}
 	}
 }
