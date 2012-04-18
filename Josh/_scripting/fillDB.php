@@ -106,15 +106,57 @@ foreach($artists as $artist)
 		
 		$query = "SELECT SongID FROM Song WHERE Name='$trackName' LIMIT 1";
 		$result = mysql_query($query) OR DIE (mysql_error());
-		if(($row = mysql_fetch_array($result)) == false)//insert song if not inserted
+		if(($row = mysql_fetch_array($result)) == false)//insert song and lyrics if song is not already in database
 		{
 			$query =  	"INSERT INTO Song (AlbumID, ArtistID, Name)
 						VALUES ($albumID, $artistID, '$trackName')";
 			print "$query<hr>";
 			$result = mysql_query($query) OR DIE (mysql_error());
 			
-			//TODO: fetch lyrics and insert into DB
+			//now get trackID
+			$trackID = null;
+			$query = "SELECT SongID FROM Song WHERE Name='$trackName' LIMIT 1";
+			$result = mysql_query($query) OR DIE (mysql_error());
+			if(($row = mysql_fetch_array($result)) !== false)
+			{
+				$trackID = $row["SongID"];
+			}
+			
+			$stanzas = getLyrics($artist, $trackName);
+			foreach($stanzas as $s)
+			{
+				$s = htmlspecialchars($s);
+				$s = str_replace("'", "&#039;", $s);
+				$query =  	"INSERT INTO Stanza (SongID, Text)
+						VALUES ($trackID, '$s')";
+				print "$query<hr>";
+				$result = mysql_query($query) OR DIE (mysql_error());
+			}
 		}
 	}
+}
+
+function urlOfLyrics($artist, $song)
+{
+	$charactersToCut = array(" ","'",",","(",")",".");
+	
+	$artist = strtolower($artist);
+	foreach($charactersToCut as $c)
+		$artist = str_replace($c,"",$artist);
+	$song = strtolower($song);	
+	foreach($charactersToCut as $c)
+		$song = str_replace($c,"",$song);
+	
+	return "http://www.azlyrics.com/lyrics/$artist/$song.html";
+}
+function getLyrics($artist,$song)
+{
+	$data = file_get_contents(urlOfLyrics($artist, $song));
+	$startOfLyrics = strpos($data, "<!-- start of lyrics -->");
+	if($startOfLyrics === false)	return null;
+	$startOfLyrics += strlen("<!-- start of lyrics -->") + 2;
+	$endOfLyrics = strpos($data, "<!-- end of lyrics -->");
+	$stanzas = explode("<br>\r\n<br>\r\n", substr($data, $startOfLyrics, $endOfLyrics - $startOfLyrics));
+	return $stanzas;
 }
 ?>
