@@ -6,7 +6,6 @@
 	//Script is now connected to the MySQL database
 	
 	$rowNo = $_POST['rowNo'];
-	$rowNo;
 	$userid = $_POST['userID'];
 			  				  	
 	$query = "SELECT * 

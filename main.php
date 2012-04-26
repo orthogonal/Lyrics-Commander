@@ -81,6 +81,7 @@
 					totalRows = parseInt(data);
 					rowNo = (Math.floor(Math.random() * (totalRows - 1)));
 					$('#rowNo').attr('value', rowNo);
+					var pageVals = $('#hidden').serialize();
 					$.post("getstanza.php", pageVals, function(data){
 						var values = data.split("&");
 						$('#lyrics').html(values[0]);
