@@ -1,13 +1,6 @@
 <?php
-//Joe Adams
-//Statistics test query
-//
-?>
-<html>
-<title>Statistics Test</title>
-<link rel="stylesheet" type="text/css" href="http://lyricscommander.com/homestyle.css" />
-
-<?php
+	//Joe Adams
+	//Statistics.php
 	require_once "../db_login.php";
 	$db_server = mysql_connect($db_hostname, $db_username, $db_password);
 	mysql_select_db($db_database, $db_server); 
@@ -19,7 +12,7 @@
 		$userid = $cookieinfo[0];
 	}
 	else{
-		$userid = 1;				//CHANGE THIS LATER TO GO BACK TO HOME IF THE USER IS NOT LOGGED IN
+		header( 'Location: http://www.lyricscommander.com' ) ;	//If they arent logged in then go to the home page
 	}
 	$query = "SELECT * FROM User WHERE UserID = $userid";
 	$result = mysql_query($query) or DIE(mysql_error());
@@ -30,23 +23,87 @@
 	//all dynamic queries are in dynamic_queries.php
 	include("dynamic_queries.php");
  ?>
+<html>
+	<head>
+		<title>Statistics Test</title>
+			<link rel="stylesheet" type="text/css" href="http://lyricscommander.com/homestyle.css" />
+				<script src="../_js/jquery-1.7.js"></script>
+				<script>
+					$(document).ready(function(){
+						hideLoading();
+					});
+					//loading animation stuff
+					function showLoading() {
+						$("#loading").show();
+					}
+	
+					function hideLoading() {
+						$("#loading").hide();
+					}
+					/*
+					 *Handle the submit button:
+					 *Calls the display_query.php with ajax
+					 */
+					$(function() {  
+						$("#submit_button").click(function() {
+							var query_type = $(".query_select").val();
+							showLoading();
+							$.post("display_query.php", {query : query_type, username : "<?= $username ?>"}, function(data){
+								$("#display_div").html(data);
+							});
+							hideLoading();
+						});  
+					}); 
+				</script>
+
  
- <head>
+	</head>
 	<body>
 		<div id="titlebar">
 			<span id="titletext">Lyrics Commander Statistics</span>
 		</div>
 	<span id="everything">
 		<span id="ProfileName">
-			<?php echo "<h1>Profile: " . $username . "</h1>"; ?>
+			<?php echo "</br></br><h1>Profile: " . $username . "</h1>"; ?>
 		</span>
 		<span id="stats">
 		<?php
-			getNumSongsRated($username);
-			echo "</br> </br> </br>";
+			/* 
+			 *number of ratings and average ratings per song HEADER
+			 */
+			
+			$num_ratings = getNumRatings($username);
+			$avg_ratings_per_song = getAvgRatingsPerSong($username);
+			$avg_ratings_per_stanza = getAvgRatingsPerStanza($username);
+			echo "No. Ratings: <b>" . $num_ratings . "</b>";
+			echo "</br>" ;
+			echo "Avg. Ratings per Song: <b>" . $avg_ratings_per_song . "</b>";
+			echo "</br>";
+			echo "Avg. Ratings per Stanza: <b>" . $avg_ratings_per_stanza . "</b>";
+			echo "</br></br>";
 			//put the dynamic section here
-			include("dynamic_section.php");
+			echo '
+			<p1>Select Statistic To Display</br></p1>
+			<select name = "query_select" class = "query_select">
+				<option>Personal Tagging Data</option>
+				<option>Global Tagging Data</option>
+				<option>Artist Tagging Data</option>
+				<option>Last 2 Songs</option>
+				<option>Last 5 Songs</option>
+				<option>Last 10 Songs</option>
+				<option>Friends</option>
+				<option>All Song Tags</option>
+			</select>
+			<button type = "button" id = "submit_button">Submit</button>
+			</form>
+			</br>'
+			;
 		?>
+		<div id = "display_div">
+			<div id = "loading">
+				<img src="loader.gif" />
+			</div>
+		</div>
 		</span>
 		<br />
 	</span>
@@ -62,10 +119,6 @@
 			</li>
 		</div>
 		
-		<!-- This form holds values generated in the JavaScript functions that are passed by AJAX-->
-		<form method="post" action="" id="hidden">
-			<input type="hidden" name="stanzaID" id="stanzaID" value="0" />
-		</form>
 		
 	</body>
 </html>
