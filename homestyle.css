@@ -3,19 +3,73 @@ body{
 	background-image:  url("homebg.png");
 }
 
+/*========================================================*/
+/*	The stuff at the top of the page (the title bar).	==*/
+/*========================================================*/
+
 #titlebar{
-	height: 100px;
+	height: 60px;
 	width: 100%;
-	position: relative;
+	position: absolute;
 	min-width: 800px;
+	background-color: rgb(76, 135, 77);
+	border-bottom: 1px solid white;
+	left: 0;
+	top: 0;
+	background-image: linear-gradient(bottom, rgb(76,135,77) 74%, rgb(56,87,57) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(76,135,77) 74%, rgb(56,87,57) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(76,135,77) 74%, rgb(56,87,57) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(76,135,77) 74%, rgb(56,87,57) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(76,135,77) 74%, rgb(56,87,57) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.74, rgb(76,135,77)),
+		color-stop(1, rgb(56,87,57))
+	);
 }
 
 #titletext{
+	margin-left: 25px;
+	margin-top: 5px;
 	position: absolute;
-	font-size: 4em;
-	color: white;
-	font-family: "Arial Black", Gadget, sans-serif;
+	font-size: 2.8em;
+	font-weight: 800;
+	color: black;
+	background-image: linear-gradient(bottom, rgb(184,184,184) 47%, rgb(224,224,224) 61%, rgb(250,250,250) 81%);
+	background-image: -o-linear-gradient(bottom, rgb(184,184,184) 47%, rgb(224,224,224) 61%, rgb(250,250,250) 81%);
+	background-image: -moz-linear-gradient(bottom, rgb(184,184,184) 47%, rgb(224,224,224) 61%, rgb(250,250,250) 81%);
+	background-image: -webkit-linear-gradient(bottom, rgb(184,184,184) 47%, rgb(224,224,224) 61%, rgb(250,250,250) 81%);
+	background-image: -ms-linear-gradient(bottom, rgb(184,184,184) 47%, rgb(224,224,224) 61%, rgb(250,250,250) 81%);
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.47, rgb(184,184,184)),
+		color-stop(0.61, rgb(224,224,224)),
+		color-stop(0.81, rgb(250,250,250))
+	);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-family: Georgia, sans-serif;
 	min-width: 800px;
+}
+
+#logouttext{
+	margin-left: 94%;
+	font-size: 1.4em;
+	font-weight: 400;
+	color: white;
+	position: relative;
+	top: 15px;
+	text-decoration: none;
+}
+
+#maintable{
+	position: absolute;
+	top: 160px;
 }
 
 #maindiv{
@@ -135,66 +189,6 @@ choicetd{
 #nextinput{
 	position: absolute;
 	left: 150px;
-}
-
-#logindiv{
-	text-shadow:  0px 0px 2px #000000;
-	font-size: 1.5em;
-}
-
-#loginsubmit{
-	text-shadow:  0px 0px 2px #000000;
-	font-size:  1.2em;
-	border-color: black;
-	background-color:  rgb(112,112,112);
-	background-image: linear-gradient(bottom, rgb(56,56,56) 27%, rgb(112,112,112) 64%, rgb(204,204,204) 82%);
-	background-image: -o-linear-gradient(bottom, rgb(56,56,56) 27%, rgb(112,112,112) 64%, rgb(204,204,204) 82%);
-	background-image: -moz-linear-gradient(bottom, rgb(56,56,56) 27%, rgb(112,112,112) 64%, rgb(204,204,204) 82%);
-	background-image: -webkit-linear-gradient(bottom, rgb(56,56,56) 27%, rgb(112,112,112) 64%, rgb(204,204,204) 82%);
-	background-image: -ms-linear-gradient(bottom, rgb(56,56,56) 27%, rgb(112,112,112) 64%, rgb(204,204,204) 82%);
-
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.27, rgb(56,56,56)),
-		color-stop(0.64, rgb(112,112,112)),
-		color-stop(0.82, rgb(204,204,204))
-	);
-}
-
-#loginsubmit:hover{
-	background-image: linear-gradient(bottom, rgb(128,126,125) 27%, rgb(166,166,166) 64%, rgb(224,224,224) 82%);
-	background-image: -o-linear-gradient(bottom, rgb(128,126,125) 27%, rgb(166,166,166) 64%, rgb(224,224,224) 82%);
-	background-image: -moz-linear-gradient(bottom, rgb(128,126,125) 27%, rgb(166,166,166) 64%, rgb(224,224,224) 82%);
-	background-image: -webkit-linear-gradient(bottom, rgb(128,126,125) 27%, rgb(166,166,166) 64%, rgb(224,224,224) 82%);
-	background-image: -ms-linear-gradient(bottom, rgb(128,126,125) 27%, rgb(166,166,166) 64%, rgb(224,224,224) 82%);
-	
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.27, rgb(128,126,125)),
-		color-stop(0.64, rgb(166,166,166)),
-		color-stop(0.82, rgb(224,224,224))
-	);
-}
-
-#loginsubmit:active{
-	background-image: linear-gradient(bottom, rgb(122,85,122) 27%, rgb(163,134,163) 64%, rgb(224,197,224) 82%);
-	background-image: -o-linear-gradient(bottom, rgb(122,85,122) 27%, rgb(163,134,163) 64%, rgb(224,197,224) 82%);
-	background-image: -moz-linear-gradient(bottom, rgb(122,85,122) 27%, rgb(163,134,163) 64%, rgb(224,197,224) 82%);
-	background-image: -webkit-linear-gradient(bottom, rgb(122,85,122) 27%, rgb(163,134,163) 64%, rgb(224,197,224) 82%);
-	background-image: -ms-linear-gradient(bottom, rgb(122,85,122) 27%, rgb(163,134,163) 64%, rgb(224,197,224) 82%);
-
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.27, rgb(122,85,122)),
-		color-stop(0.64, rgb(163,134,163)),
-		color-stop(0.82, rgb(224,197,224))
-	);
 }
 
 .choices{

@@ -33,6 +33,7 @@
 			var buttonsDown	= 0
 			
 			$(document).ready(function(){
+				$('#userID').attr('value', userID);
 				newStanza();
 				for (i = 0; i < 20; i++)					//Clear all the buttons and show the first stanza when the page loads.
 					selections[i] = 0;
@@ -75,13 +76,11 @@
 			var lastAlbum = "";
 			
 			function newStanza(){
-				var maxVal = 0;
-				$.post("globals.php", function(data){
-					maxVal = parseInt(data);										//AJAX call to globals page, this will need to be updated once there are multiple globals.
-					tempstanzaID = stanzaID;
-					stanzaID = (Math.floor(Math.random() * maxVal) + 1);			//Get a number from 0 to (maxVal - 1) and add 1, so it's from 1 to maxVal (a random stanzaID)
-					$('#stanzaID').attr('value', stanzaID);							//Store the stanzaID in a hidden form field
-					var pageVals = $('#hidden').serialize();						//Serialize the form so that it can be passed via AJAX.
+				var pageVals = $('#hidden').serialize();						//Serialize the form so that it can be passed via AJAX.		
+				$.post("remrows.php", pageVals, function(data){
+					totalRows = parseInt(data);
+					rowNo = (Math.floor(Math.random() * (totalRows - 1)));
+					$('#rowNo').attr('value', rowNo);
 					$.post("getstanza.php", pageVals, function(data){
 						var values = data.split("&");
 						$('#lyrics').html(values[0]);
@@ -133,6 +132,9 @@
 	<body>
 		<div id="titlebar">
 			<span id="titletext">Lyrics Commander</span>
+			<?php
+				if ($loggedin) echo "<a href='' id='logouttext'>Logout</a>";
+			?>
 		</div>
 		
 		<table id="maintable">
@@ -209,7 +211,8 @@
 		
 		<!-- These forms hold values generated in the JavaScript functions that are passed by AJAX-->
 		<form method="post" action="" id="hidden">
-			<input type="hidden" name="stanzaID" id="stanzaID" value="0" />
+			<input type="hidden" name="userID" id="userID" value="" />
+			<input type="hidden" name="rowNo" id="rowNo" value="0" />
 		</form>
 		
 		<form method="post" action="" id="hiddentag">

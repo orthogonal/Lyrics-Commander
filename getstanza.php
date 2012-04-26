@@ -1,14 +1,22 @@
 <?php	//getstanza.php
+	require_once "globals.php";
 	require_once "db_login.php";
 	$db_server = mysql_connect($db_hostname, $db_username, $db_password);
 	mysql_select_db($db_database, $db_server); 
 	//Script is now connected to the MySQL database
 	
-	$stanzaID = $_POST['stanzaID'];
-	
+	$rowNo = $_POST['rowNo'];
+	$rowNo;
+	$userid = $_POST['userID'];
+			  				  	
 	$query = "SELECT * 
-			  FROM `Stanza` 
-			  WHERE `StanzaID` = $stanzaID";
+			  FROM Stanza S 
+			  WHERE NOT EXISTS (SELECT * 
+			  					FROM Rating R
+			  					WHERE UserID = $userid
+			  					AND R.StanzaID = S.StanzaID)
+			  LIMIT $rowNo, 1";
+			  					
 	$result = mysql_query($query) or die("&?" . mysql_error() . "\nLine: " . __LINE__ . "\nQuery was: " . $query);		//If there is a MySQL error, the output will have a "&?" substring in it.
 	$row = mysql_fetch_row($result);								//0:  StanzaID	1:  SongID	2:  Text
 	
