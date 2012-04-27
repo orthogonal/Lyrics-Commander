@@ -94,7 +94,13 @@
 							$(".choices").attr("disabled", "disabled");
 							$("#nextbutton").css("color", "#A3A3A3");
 							
+							//DELETE THIS, ITS HERE FOR TESTING//
+							
+							alert("0: " + values[0] + "\n1: " + values[1] + "\n2: " + values[2] + "\n3: " + values[3]	
+									+ "\n4: " + values[4] + "\n5: " + values[5] + "\n6: " + values[6] + "\n7: " + values[7]);
+																				
 							//Dynamically build a multiple-tuple insertion query.
+							var stanzaID = values[7];
 							var tuples = 0;
 							var query = "INSERT INTO Rating(StanzaID, WordID, UserID) VALUES";
 							for (i = 0; i < 20; i++){
@@ -102,9 +108,9 @@
 									var wordID = i + 1
 									tuples++;	
 									if (tuples == 1)
-										query += "(" + tempstanzaID + ", " + wordID + ", " + userID + ")"
+										query += "(" + stanzaID + ", " + wordID + ", " + userID + ")"
 									else
-										query += ", (" + tempstanzaID + ", " + wordID + ", " + userID + ")"
+										query += ", (" + stanzaID + ", " + wordID + ", " + userID + ")"
 								}	
 							}
 							if (tuples != 0){							//Making sure there's no JavaScript games.
@@ -200,15 +206,6 @@
 		</td>
 		</tr>
 		</table>
-		
-		<div id="bottombar">
-			<li>
-				<a href="#statistics">Statistics</a>
-				<a href="#settings">Settings</a>
-				<a href="#logout">Logout</a>
-				<a href="#about">About</a>
-			</li>
-		</div>
 		
 		<!-- These forms hold values generated in the JavaScript functions that are passed by AJAX-->
 		<form method="post" action="" id="hidden">

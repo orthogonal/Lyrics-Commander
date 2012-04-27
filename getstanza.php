@@ -18,7 +18,7 @@
 			  					
 	$result = mysql_query($query) or die("&?" . mysql_error() . "\nLine: " . __LINE__ . "\nQuery was: " . $query);		//If there is a MySQL error, the output will have a "&?" substring in it.
 	$row = mysql_fetch_row($result);								//0:  StanzaID	1:  SongID	2:  Text
-	
+	$stanzaid = $row[0];
 	echo "$row[2]" . "&";											//Output the stanza followed by the delimiter "&" (no stanza should have a "&" in it).
 	
 	$songID = $row[1];
@@ -51,7 +51,8 @@
 	
 	echo "$row[1]" . "&";											//Output the artist name (note:  no "&" is allowed, so i.e. "Simon & Garfunkel" should be "Simon and Garfunkel")
 	echo "$row[2]" . "&";											//Output the URL of the artist image (again, no "&")
-	echo "$row[3]";													//Output the biography of the artist
+	echo "$row[3]" . "&";											//Output the biography of the artist
+	echo "$stanzaid";												//Output the stanza id								
 	
 	/*	In conclusion:
 		0:  Stanza text
@@ -61,6 +62,7 @@
 		4:  Artist name
 		5:  Artist URL
 		6:  Artist biography
+		7:  Stanza ID
 		Delimiter is "&"
 		Output will have "&?" in it if there is an error, followed by the error, with nothing after that.
 		*/

@@ -4,6 +4,6 @@
 	mysql_select_db($db_database, $db_server);
 	
 	$query = $_POST['query'];
-	$result = mysql_query($query) or die(mysql_error());
+	$result = mysql_query($query) or die("\n$query\n" . mysql_error());
 	echo "success";
 ?>
