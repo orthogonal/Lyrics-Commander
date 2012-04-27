@@ -8,7 +8,8 @@ mysql_connect($db_hostname,$db_username, $db_password) OR DIE (mysql_error());
 mysql_select_db($db_database) OR DIE (mysql_error());
 
 $key = "b25b959554ed76058ac220b7b2e0a026";
-$artists = array("Bob Dylan");//,"LMFAO", "Adele");
+
+$artists = split("\n", file_get_contents("artists.txt"));
 
 foreach($artists as $artist)
 {
@@ -131,10 +132,13 @@ foreach($artists as $artist)
 						VALUES ($trackID, '$s')";
 				print "$query<hr>";
 				$result = mysql_query($query) OR DIE (mysql_error());
+				break;//only inserting first stanza of each song for now, so break out of loop
 			}
 		}
 	}
 }
+
+
 
 function urlOfLyrics($artist, $song)
 {

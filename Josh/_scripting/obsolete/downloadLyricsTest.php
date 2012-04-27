@@ -1,6 +1,6 @@
 <?php
-$artist = "Bob Dylan";
-$song = "Like A Rolling Stone";
+$artist = "coldplay";
+$song = "paradise";
 var_dump(getLyrics($artist,$song));
 
 function urlOfLyrics($artist, $song)
@@ -14,6 +14,7 @@ function urlOfLyrics($artist, $song)
 	foreach($charactersToCut as $c)
 		$song = str_replace($c,"",$song);
 	
+	if(strpos($song, "the") === 0)	$song = substr($song, 3);
 	return "http://www.azlyrics.com/lyrics/$artist/$song.html";
 }
 function getLyrics($artist,$song)
@@ -23,7 +24,7 @@ function getLyrics($artist,$song)
 	if($startOfLyrics === false)	return null;
 	$startOfLyrics += strlen("<!-- start of lyrics -->") + 2;
 	$endOfLyrics = strpos($data, "<!-- end of lyrics -->");
-	$stanzas = explode("<br>\r\n<br>\r\n", substr($data, $startOfLyrics, $endOfLyrics - $startOfLyrics));
+	$stanzas = explode("<br>\n<br>\n", substr($data, $startOfLyrics, $endOfLyrics - $startOfLyrics));
 	return $stanzas;
 }
 ?>
