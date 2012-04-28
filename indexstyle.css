@@ -101,13 +101,23 @@ body{
 	margin: 5px;
 }
 
-#left{
+#leftout{
 	width: 50%;
 	text-align: center;
 }
 
-#right{
+#rightout{
 	width: 50%;
+}
+
+#leftin{
+	width: 50%;
+	text-align: center;
+}
+
+#rightin{
+	width: 50%;
+	text-align: center;
 }
 
 /*==========================================================================*/
@@ -165,6 +175,30 @@ body{
 	text-align: left;
 	font-size: 1.4em;
 	font-family: Georgia, sans-serif;
+}
+
+/*================================================================================*/
+/*	Everything having to do with the left side of the div for logged in users.	==*/
+/*================================================================================*/
+
+#mainbutton{
+	font-size: 1.8em;
+	font-family: sans-serif;
+	width: 300px;
+	background-color: white;
+	border-radius: 25px;
+}
+
+/*================================================================================*/
+/*	Everything having to do with the right side of the div for logged in users.	==*/
+/*================================================================================*/
+
+#statsbutton{
+	font-size: 1.8em;
+	font-family: sans-serif;
+	width: 300px;
+	background-color: white;
+	border-radius: 25px;
 }
 
 /*================================================*/

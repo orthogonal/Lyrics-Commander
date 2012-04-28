@@ -210,7 +210,7 @@
 					<tr>			
 					<?php
 						if (!$loggedin) echo <<<_HDOC
-						<td id="left">
+						<td id="leftout">
 							<span id="join">Join The Party!</span>
 							<form id="registerform" method="post" action="index2.php">
 								<input type="text" name="username" id="username" class="registerfield" maxlength="31" width="25" title="Username"/>
@@ -224,7 +224,7 @@
 								<button id="login_button">Login</button>
 							</div>
 						</td>
-						<td id="right">
+						<td id="rightout">
 							<span id="description">
 								Lyrics Commander presents you with lyrics from a wide variety of songs and asks you to 
 								categorize them based on your opinions of them.  <br />Over time, the engine will generate
@@ -235,11 +235,11 @@
 						</td>
 _HDOC;
 						else echo <<<_HDOC
-						<td id="left">
-							<a href="main.php">Go</a>
+						<td id="leftin">
+							<button id="mainbutton" onclick="window.location.href='main.php'">Play Game</button>
 						</td>
-						<td id="right">
-							<a href="stats.php">Numbers</a>
+						<td id="rightin">
+							<button id="statsbutton" onclick="window.location.href='stats.php'">Statistics</button>
 						</td>
 _HDOC;
 ?>
