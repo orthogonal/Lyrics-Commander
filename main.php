@@ -79,6 +79,10 @@
 				var pageVals = $('#hidden').serialize();						//Serialize the form so that it can be passed via AJAX.		
 				$.post("remrows.php", pageVals, function(data){
 					totalRows = parseInt(data);
+					if (totalRows == 0){
+						alert("You have already seen every lyric we have!  Please e-mail acl68@case.edu and let us know so we can add more.");
+						return;
+					}
 					rowNo = (Math.floor(Math.random() * (totalRows - 1)));
 					$('#rowNo').attr('value', rowNo);
 					var pageVals = $('#hidden').serialize();
@@ -94,7 +98,7 @@
 							$(".choices").attr("disabled", "disabled");
 							$("#nextbutton").css("color", "#A3A3A3");
 							
-							//DELETE THIS, ITS HERE FOR TESTING//
+							//DELETE THIS, IT IS HERE FOR TESTING//
 							
 							alert("0: " + values[0] + "\n1: " + values[1] + "\n2: " + values[2] + "\n3: " + values[3]	
 									+ "\n4: " + values[4] + "\n5: " + values[5] + "\n6: " + values[6] + "\n7: " + values[7]);
