@@ -9,9 +9,7 @@
 		$email = $_POST["email"];
 		$password = $_POST["password"];
 
-		if(strlen($password)<31 && strlen($email<127) && strlen(username)<31 
-			/*&& preg_match('^"[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)?*(\.[a-z]{2,3})$"^', $email) == true */
-			&& $username != "" && $email != "" && $password != ""){
+		if(strlen($password)<31 && strlen($email<127) && strlen(username)<31 && ereg("^[^@]{1,64}@[^@]{1,255}$", $email && $username != "" && $email != "" && $password != ""){
 			$password = md5($password);
 			$query =  "INSERT INTO User (Username, Email, Password) VALUES ('$username', '$email', '$password')";
 			$result = mysql_query($query) or die(mysql_error());
@@ -24,8 +22,8 @@
 				die("ERROR email has too many characters");
 			if (strlen($username)>=31)
 				die("ERROR username has too many characters");
-			//if (preg_match('^"[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)?*(\.[a-z]{2,3})$"^', $email) == false)
-			//	die("ERROR please enter a valid email address");
+			if (!ereg("^[^@]{1,64}@[^@]{1,255}$", $email)){
+				die("ERROR please enter a valid email address");
 			if ($username!="")
 				die("ERROR You did not enter in a username");
 			if ($password!="")
