@@ -34,6 +34,8 @@
 		<td id="rightBox">
 		<?php
 		require_once("db_login.php");
+		mysql_connect($db_hostname,$db_username, $db_password) OR DIE (mysql_error());
+			mysql_select_db($db_database) OR DIE (mysql_error());
 		if(isset($_POST["fUsername"]))
 		{
 			$fUsername = $_POST["fUsername"];
@@ -41,9 +43,8 @@
 			$cookieinfo = explode("%", $_COOKIE['main']);
 			
 			$User1ID = $cookieinfo[0];
-			if($User1ID == "")	exit();
-			mysql_connect($db_hostname,$db_username, $db_password) OR DIE (mysql_error());
-			mysql_select_db($db_database) OR DIE (mysql_error());
+			if($User1ID = "")	exit();
+			
 
 			
 			$query2="SELECT UserID,Username 
@@ -58,39 +59,47 @@
 				if($User2ID != "")
 				{
 					$query =  "INSERT INTO Buddies (User1ID, User2ID)
-				VALUES ($User1ID, $User2ID)";
+					VALUES ($User1ID, $User2ID)";
 					$result = mysql_query($query);
 					print "You have friended <b>" . $row2["Username"] . ".</b>";
 				}
 			}
 			
-			$queryFriends = "SELECT User2ID
-					FROM Buddies
-					WHERE username=='$fUsername'";
-		$resultFriends = mysql_query($queryFriends) or die(mysql_error());
 		
-		
-		while($row = mysql_fetch_array($queryFriends))
-		{
-		$User2ID = $row['UserID'];
-		
-		
-		$queryF="SELECT Username 
-							FROM User 
-								WHERE UserID=='$User2ID' LIMIT 1";
-			$resultF = mysql_query($queryF);
-		$rowF = mysql_fetch_array($resultF);
-		
-		
-		print "Friends List<b>" . $rowF["Username"];
-		
-		}
 			
 	
 			
 			
 			
 		}
+			$cookieinfo = explode("%", $_COOKIE['main']);
+			$User1ID = $cookieinfo[0];
+			if($User1ID = "")	exit();
+			
+			$queryFriends = "SELECT User2ID
+					FROM Buddies
+					WHERE User1ID='$User1ID'";
+			$resultFriends = mysql_query($queryFriends) or die(mysql_error());
+		
+		if($queryFriends) {
+			$row = mysql_fetch_array($resultFriends);
+			$x=0;
+			while($row[$x]){
+			$User2ID = $row[$x];
+			
+			
+				$queryF="SELECT Username 
+									FROM User 
+										WHERE UserID=='$User2ID' LIMIT 1";
+			$resultF = mysql_query($queryF);
+			$rowF = mysql_fetch_array($resultF);
+
+			print "Friends List<b>" . $rowF["Username"] . ".</b>";
+			$x++;
+			}
+		}
+		
+		
 		?>
 		
 		</td>
