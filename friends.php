@@ -3,7 +3,7 @@
 		<title>Lyrics Commander Friends Page</title>
 		<link rel="stylesheet" type="text/css" href="homestyle.css" />
 		<script src="_js/jquery-1.7.js"></script>
-	<!--jhkhgkgk-->	
+	<!--k-->	
 		
 		<div id="titlebar">
 			<span id="titletext">Lyrics Commander Friends Page</span>
@@ -17,7 +17,7 @@
 		
 		
 		
-		<br /><br /><br /><br /><br /><br /><br />
+		<br/><br/><br/><br/><br/><br/><br/>
 		ADD FRIENDS
 		<br />
 		<tr><td>Friend's Username</td><td><input type="text" name="fUsername" id="fUsername"/></td></tr>
@@ -26,6 +26,8 @@
 		</table>
 		
 		</form>
+		
+		
 		
 		
 		</td>
@@ -46,7 +48,7 @@
 			
 			$query2="SELECT UserID,Username 
 							FROM User 
-								WHERE username='$fUsername' LIMIT 1";
+								WHERE username=='$fUsername' LIMIT 1";
 			$result2 = mysql_query($query2);
 			if(isset($result2))
 			{		
@@ -61,6 +63,33 @@
 					print "You have friended <b>" . $row2["Username"] . ".</b>";
 				}
 			}
+			
+			$queryFriends = "SELECT User2ID
+					FROM Buddies
+					WHERE username=='$fUsername'";
+		$resultFriends = mysql_query($queryFriends) or die(mysql_error());
+		
+		
+		while($row = mysql_fetch_array($queryFriends))
+		{
+		$User2ID = $row['UserID'];
+		
+		
+		$queryF="SELECT Username 
+							FROM User 
+								WHERE UserID=='$User2ID' LIMIT 1";
+			$resultF = mysql_query($queryF);
+		$rowF = mysql_fetch_array($resultF);
+		
+		
+		print "Friends List<b>" . $rowF["Username"];
+		
+		}
+			
+	
+			
+			
+			
 		}
 		?>
 		
