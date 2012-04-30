@@ -49,7 +49,7 @@
 			
 			$query2="SELECT UserID,Username 
 							FROM User 
-								WHERE username=='$fUsername' LIMIT 1";
+								WHERE username='$fUsername' LIMIT 1";
 			$result2 = mysql_query($query2);
 			if(isset($result2))
 			{		
@@ -90,7 +90,7 @@
 			
 				$queryF="SELECT Username 
 									FROM User 
-										WHERE UserID=='$User2ID' LIMIT 1";
+										WHERE UserID='$User2ID' LIMIT 1";
 			$resultF = mysql_query($queryF);
 			$rowF = mysql_fetch_array($resultF);
 
