@@ -234,16 +234,31 @@
 							</span>
 						</td>
 _HDOC;
-						else echo <<<_HDOC
-						<td id="leftin">
-							<button id="mainbutton" onclick="window.location.href='main.php'">Play Game</button>
-						</td>
-						<td id="rightin">
-							<button id="statsbutton" onclick="window.location.href='stats.php'">Statistics</button>
-						</td>
+						else 
+						{
+							echo <<<_HDOC
+							<td id="leftin">
+								<button id="mainbutton" onclick="window.location.href='main.php'">Play Game</button>
+							</td>
+							<td id="rightin">
+								<button id="statsbutton" onclick="window.location.href='stats.php'">Statistics</button>
+							</td>
 _HDOC;
 ?>
-					</tr>
+						</tr>
+						<tr>
+						<?php
+							echo <<<_HDOC
+							<td id="leftin">
+								<button id="friendsbutton" onclick="window.location.href='friends.php'">Friends</button>
+							</td>
+							<td id="rightin">
+								<!--<button id="anotherbutton" onclick="window.location.href='stats.php'">Statistics</button>-->
+							</td>
+_HDOC;
+						}
+?>
+						</tr>
 				</table>
 			</div>
 		</div>
