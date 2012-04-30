@@ -9,29 +9,20 @@
 			<span id="titletext">Lyrics Commander Friends Page</span>
 		</div>
 		<div id="maindiv">
-			<table id="centertable">
-				<tr>
-				<td id="leftbox">
-		<form action="" method="post"><table border="0">
+		<table id="centertable">
+		<tr>
 		
-		
-		
-		
-		<br/><br/><br/><br/><br/><br/><br/>
-		ADD FRIENDS
-		<br />
-		<tr><td>Friend's Username</td><td><input type="text" name="fUsername" id="fUsername"/></td></tr>
-		
-		<tr><td> <input type="submit" name="mysubmit" id="mysubmit" value="Submit" /></td></tr>
-		</table>
-		
-		</form>
-		
-		
-		
-		
+		<td id="leftbox" valign="top">
+			<br/><br/><br/>
+			<form action="" method="post">		
+				<p id="addfriends">ADD FRIENDS</p>
+				<p>Friend's Username: <input type="text" name="fUsername" id="fUsername"/></p>
+				<p><input type="submit" name="mysubmit" id="mysubmit" value="Submit" /></p>
+			</form>
 		</td>
-		<td id="rightBox">
+		
+		<td id="rightBox" valign="top">
+		<br/><br/><br/>
 		<?php
 		require_once("db_login.php");
 		mysql_connect($db_hostname,$db_username, $db_password) OR DIE (mysql_error());
@@ -43,7 +34,7 @@
 			$cookieinfo = explode("%", $_COOKIE['main']);
 			
 			$User1ID = $cookieinfo[0];
-			if($User1ID = "")	exit();
+			if($User1ID == "")	exit();
 			
 
 			
@@ -60,6 +51,7 @@
 				{
 					$query =  "INSERT INTO Buddies (User1ID, User2ID)
 					VALUES ($User1ID, $User2ID)";
+					
 					$result = mysql_query($query);
 					print "You have friended <b>" . $row2["Username"] . ".</b>";
 				}
@@ -74,28 +66,29 @@
 		}
 			$cookieinfo = explode("%", $_COOKIE['main']);
 			$User1ID = $cookieinfo[0];
-			if($User1ID = "")	exit();
+			if($User1ID == "")	exit();
 			
 			$queryFriends = "SELECT User2ID
 					FROM Buddies
-					WHERE User1ID='$User1ID'";
+					WHERE User1ID=$User1ID";
+					
 			$resultFriends = mysql_query($queryFriends) or die(mysql_error());
-		
-		if($queryFriends) {
-			$row = mysql_fetch_array($resultFriends);
-			$x=0;
-			while($row[$x]){
-			$User2ID = $row[$x];
+		print "<p id=\"friendslist\">FRIENDS LIST</p>";
+		if(isset($resultFriends)) {
+			
+			while(($row = mysql_fetch_array($resultFriends)) != null){
+			$User2ID = $row["User2ID"];
 			
 			
 				$queryF="SELECT Username 
 									FROM User 
-										WHERE UserID='$User2ID' LIMIT 1";
+										WHERE UserID=$User2ID LIMIT 1";
+									
 			$resultF = mysql_query($queryF);
 			$rowF = mysql_fetch_array($resultF);
 
-			print "Friends List<b>" . $rowF["Username"] . ".</b>";
-			$x++;
+			print "<p>" . $rowF["Username"] . "</p>";
+			
 			}
 		}
 		
@@ -105,14 +98,6 @@
 		</td>
 		
 		</tr></table>
-		<div id="bottombar">
-			<li>
-				<a href="#statistics">Statistics</a>
-				<a href="#settings">Settings</a>
-				<a href="#logout">Logout</a>
-				<a href="#about">About</a>
-			</li>
-		</div>
 		
 		<!-- This form holds values generated in the JavaScript functions that are passed by AJAX-->
 		<form method="post" action="" id="hidden">
