@@ -90,6 +90,9 @@
 			print "<p>" . $rowF["Username"] . "</p>";
 			
 			}
+			
+			print "<p id=\"potentialfriends\">Potential Friends</p>";
+			
 		}
 		
 		
