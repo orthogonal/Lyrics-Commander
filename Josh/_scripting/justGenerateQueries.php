@@ -86,8 +86,14 @@ foreach($artists as $artist)
 			
 		//now get trackID
 		$trackID = $trackCounter;
-			
+		
+		sleep(30);	//space out crawling of azlyrics
 		$stanzas = getLyrics($artist, $trackName);
+		if(count($stanzas) == 0)
+		{
+			break; //skip rest of top tracks if cannot find lyrics for one track	
+		}
+		
 		$stanzaCounter = 0;
 		foreach($stanzas as $s)
 		{
@@ -116,7 +122,7 @@ foreach($artists as $artist)
 
 function urlOfLyrics($artist, $song)
 {
-	$charactersToCut = array(" ","'",",","(",")",".");
+	$charactersToCut = array(" ","'",",","(",")",".","+");
 	
 	$artist = strtolower($artist);
 	foreach($charactersToCut as $c)

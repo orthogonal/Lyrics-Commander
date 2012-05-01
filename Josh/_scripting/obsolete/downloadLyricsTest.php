@@ -5,7 +5,7 @@ var_dump(getLyrics($artist,$song));
 
 function urlOfLyrics($artist, $song)
 {
-	$charactersToCut = array(" ","'",",","(",")",".");
+	$charactersToCut = array(" ","'",",","(",")",".","+");
 	
 	$artist = strtolower($artist);
 	foreach($charactersToCut as $c)
