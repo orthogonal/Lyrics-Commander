@@ -129,7 +129,7 @@
 					}
 					
 					rowNo = (Math.floor(Math.random() * (totalRows)))
-					if (rowNo == totalRows) rowNo = 0							//Pick a random row number from 0 to max - 1.
+					if (rowNo == totalRows) rowNo = 0;							//Pick a random row number from 0 to max - 1.
 																				//All the available rows will be returned and the n'th is used.
 					$('#rowNo').attr('value', rowNo);
 					
@@ -146,7 +146,7 @@
 						//DELETE THIS, IT IS HERE FOR TESTING//
 							
 						//alert("0: " + values[0] + "\n1: " + values[1] + "\n2: " + values[2] + "\n3: " + values[3]	
-									+ "\n4: " + values[4] + "\n5: " + values[5] + "\n6: " + values[6] + "\n7: " + values[7]);
+									//+ "\n4: " + values[4] + "\n5: " + values[5] + "\n6: " + values[6] + "\n7: " + values[7]);
 									
 						stanzaID = values[7];
 						lastArtist = values[4];
