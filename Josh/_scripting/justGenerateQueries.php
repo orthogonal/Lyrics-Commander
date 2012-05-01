@@ -83,6 +83,7 @@ foreach($artists as $artist)
 		$query =  	"INSERT INTO Song (AlbumID, ArtistID, Name)
 					VALUES ($albumID, $artistID, '$trackName')";
 		print "$query<hr>";
+		$trackCounter++;		
 			
 		//now get trackID
 		$trackID = $trackCounter;
@@ -106,7 +107,6 @@ foreach($artists as $artist)
 			if($stanzaCounter >= $testStanzaLimit)
 				break;
 		}
-		$trackCounter++;		
 
 		$countOfTracks++;		
 		if($countOfTracks >= $testTrackLimit)//hardcoded limit for testing
