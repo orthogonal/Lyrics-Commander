@@ -105,6 +105,13 @@
 						$(".choices").removeAttr("disabled");
 						buttonsDown = 0;
 					});
+					
+					$('#data').attr('value', wordID + "%" + stanzaID);
+						dataToPost = $('#hiddenpot').serialize();
+						$.post("addPotentialBuddy.php", dataToPost, function(data){
+						if (data != "success") 
+							alert("There has been an error, please e-mail admin@lyricscommander.com\n" + data);
+					});
 				}
 			}
 			
@@ -233,6 +240,10 @@
 		
 		<form method="post" action="" id="hiddentag">
 			<input type="hidden" name="query" id="query" value="" />
+		</form>
+		
+		<form method="post" action="" id="hiddenpot">
+			<input type="hidden" name="data" id="data" value="" />
 		</form>
 		
 	</body>
