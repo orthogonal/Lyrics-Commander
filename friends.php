@@ -48,6 +48,15 @@
 					VALUES ($User1ID, $User2ID)";
 					
 					$result = mysql_query($query);
+					
+					$queryL="INSERT INTO Log (UserID, Time, ActionID)
+									VALUES ($User1ID, CURRENT_TIMESTAMP, 2)";
+					$resultQueryL = mysql_query($queryL) or die(mysql_error());
+					
+					
+					
+					
+					
 					print "<p id=\"newfriend\">You have friended <b>" . $row2["Username"] . "</b>.</p>";
 				}
 			}
