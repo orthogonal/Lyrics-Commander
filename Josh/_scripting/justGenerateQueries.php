@@ -2,38 +2,43 @@
 $key = "b25b959554ed76058ac220b7b2e0a026";
 
 $artists = split("\n", file_get_contents("artists.txt"));
+//$artists = array_reverse($artists);
 $artistCounter = 1;
 $albumCounter = 1;
 $trackCounter = 1;
 $stanzaCounter = 1;
 
-$testLimit = 10;//artist limit
-$testTrackLimit = 1;//track limit
+$testLimit = 1000;//artist limit
+$testTrackLimit = 5;//track limit
 $testStanzaLimit = 1;//stanza limit
 
 $counter = 0;
 foreach($artists as $artist)
 {
+	if($artist == "")	continue;
+	//if($counter == 500)
+		//$testTrackLimit = 1; //reduce track limit for more popular artists
+	
 	$artistCopy = str_replace("'", "\\'", $artist);
 	$query = "SELECT ArtistID FROM Artist WHERE Name='$artistCopy' LIMIT 1";
 	$artistID = $artistCounter;
 	
 	$xml0 = new SimpleXMLElement(file_get_contents("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" . str_replace(" ", "%20", $artistCopy) . "&api_key=$key"));
 	$image = "";
-	$bio = "";
+	//$bio = "";
 	foreach($xml0->artist as $artistTemp)
 	{
 		foreach($artistTemp->image as $i)
 		{
 			$image = $i;
 		}//want to assign last $i to $image... can't just access it like an array
-		$bio = $artistTemp->bio->content;
+		//$bio = $artistTemp->bio->content;
 		//$bio = htmlspecialchars($artistTemp->bio->content);
 	}
 	
-	$bio = str_replace("'", "\\'", $bio);
-	$query =  	"INSERT INTO Artist (Name, ImageURL, Bio)
-				VALUES ('$artistCopy', '$image', '$bio')";
+	//$bio = str_replace("'", "\\'", $bio);
+	$query =  	"INSERT INTO Artist (Name, ImageURL)
+				VALUES ('$artistCopy', '$image')";
 	print "$query<hr>";
 	$artistCounter++;
 	
@@ -95,7 +100,7 @@ foreach($artists as $artist)
 			if($stanzaCounter >= $testStanzaLimit)
 				break;
 		}
-		$trackID++;		
+		$trackCounter++;		
 
 		$countOfTracks++;		
 		if($countOfTracks >= $testTrackLimit)//hardcoded limit for testing
@@ -104,6 +109,8 @@ foreach($artists as $artist)
 	$counter++;
 	if($testLimit != -1 && $counter >= $testLimit)
 		break;
+		
+	file_put_contents("trackProgressCounter.txt", $counter);
 }
 
 
@@ -129,6 +136,7 @@ function getLyrics($artist,$song)
 	$startOfLyrics += strlen("<!-- start of lyrics -->") + 2;
 	$endOfLyrics = strpos($data, "<!-- end of lyrics -->");
 	$stanzas = explode("<br>\n<br>\n", substr($data, $startOfLyrics, $endOfLyrics - $startOfLyrics));
+	if(count($stanzas) == 1) $stanzas = explode("<br>\r\n<br>\r\n", substr($data, $startOfLyrics, $endOfLyrics - $startOfLyrics));
 	return $stanzas;
 }
 

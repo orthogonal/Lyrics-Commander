@@ -201,6 +201,19 @@ body{
 	border-radius: 25px;
 }
 
+
+/*================================================================================*/
+/*	Everything having to do with friends.	==*/
+/*================================================================================*/
+
+#friendsbutton{
+	font-size: 1.8em;
+	font-family: sans-serif;
+	width: 300px;
+	background-color: white;
+	border-radius: 25px;
+}
+
 /*================================================*/
 /*	Everything having to do with logging in.	==*/
 /*================================================*/

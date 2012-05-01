@@ -18,9 +18,7 @@
 /*==	We don't need to check if the name already exists, because that's done on the page.   ==*/
 /*==============================================================================================*/
 	
-		if(strlen($password)<31 && strlen($email<127) && strlen(username)<31 
-			/*&& preg_match('^"[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)?*(\.[a-z]{2,3})$"^', $email) == true */
-			&& $username != "" && $email != "" && $password != ""){
+		if(strlen($password)<31 && strlen($email<127) && strlen(username)<31 && $username != "" && $email != "" && $password != "" && ereg("^[^@]{1,64}@[^@]{1,255}$", $email)){
 			$password = md5($password);
 			$query =  "INSERT INTO User (Username, Email, Password) VALUES ('$username', '$email', '$password')";
 			$result = mysql_query($query) or die(mysql_error());
@@ -33,8 +31,8 @@
 				die("ERROR email has too many characters");
 			if (strlen($username)>=31)
 				die("ERROR username has too many characters");
-			//if (preg_match('^"[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)?*(\.[a-z]{2,3})$"^', $email) == false)
-			//	die("ERROR please enter a valid email address");
+			if (!ereg("^[^@]{1,64}@[^@]{1,255}$", $email))
+				die("ERROR please enter a valid email address");
 			if ($username!="")
 				die("ERROR You did not enter in a username");
 			if ($password!="")
@@ -208,47 +206,61 @@
 			<div id="centerdiv">
 				<table id="centertable">
 					<tr>			
-					<?php
-						if (!$loggedin) echo <<<_HDOC
-						<td id="leftout">
-							<span id="join">Join The Party!</span>
-							<form id="registerform" method="post" action="index2.php">
-								<input type="text" name="username" id="username" class="registerfield" maxlength="31" width="25" title="Username"/>
-								<br /><input type="password" name="password" id="password" class="registerfield" maxlength="31" width="25" title="Password"/>
-								<br /><input type="text" name="email" id="email" class="registerfield" maxlength="127" width="25" title="E-mail Address"/>
-								<br /><input type="submit" name="submit_register" id="submit_register" value="Submit" />
-							</form>
-							
-							<div id="already_div">
-								<span id="alreadymember">Already have an account?</span>
-								<button id="login_button">Login</button>
-							</div>
-						</td>
-						<td id="rightout">
-							<span id="description">
-								Lyrics Commander presents you with lyrics from a wide variety of songs and asks you to 
-								categorize them based on your opinions of them.  <br />Over time, the engine will generate
-								a rich collection of fascinating information about your musical tastes, which you can use
-								to compare yourself to your friends and other users.  <br />Lyrics Commander is a fun way to 
-								discover new bands, interact with music and learn about yourself.
-							</span>
-						</td>
-_HDOC;
-						else echo <<<_HDOC
-						<td id="leftin">
-							<button id="mainbutton" onclick="window.location.href='main.php'">Play Game</button>
-						</td>
-						<td id="rightin">
-							<button id="statsbutton" onclick="window.location.href='stats.php'">Statistics</button>
-						</td>
-_HDOC;
-?>
-					</tr>
-				</table>
+						<?php
+						if (!$loggedin) 
+						{
+						?>
+                            <td id="leftout">
+                                <span id="join">Join The Party!</span>
+                                <form id="registerform" method="post" action="index.php">
+                                    <input type="text" name="username" id="username" class="registerfield" maxlength="31" width="25" title="Username"/>
+                                    <br /><input type="password" name="password" id="password" class="registerfield" maxlength="31" width="25" title="Password"/>
+                                    <br /><input type="text" name="email" id="email" class="registerfield" maxlength="127" width="25" title="E-mail Address"/>
+                                    <br /><input type="submit" name="submit_register" id="submit_register" value="Submit" />
+                                </form>
+                                
+                                <div id="already_div">
+                                    <span id="alreadymember">Already have an account?</span>
+                                    <button id="login_button">Login</button>
+                                </div>
+                            </td>
+                            <td id="rightout">
+                                <span id="description">
+                                    Lyrics Commander presents you with lyrics from a wide variety of songs and asks you to 
+                                    categorize them based on your opinions of them.  <br />Over time, the engine will generate
+                                    a rich collection of fascinating information about your musical tastes, which you can use
+                                    to compare yourself to your friends and other users.  <br />Lyrics Commander is a fun way to 
+                                    discover new bands, interact with music and learn about yourself.
+                                </span>
+                            </td>
+						<?php
+						}
+						else 
+						{
+						?>							
+                                <td id="leftin">
+                                    <button id="mainbutton" onclick="window.location.href='main.php'">Play Game</button>
+                                </td>
+                                <td id="rightin">
+                                    <button id="statsbutton" onclick="window.location.href='stats/'">Statistics</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="leftin">
+                                    <button id="friendsbutton" onclick="window.location.href='friends.php'">Friends</button>
+                                </td>
+                                <td id="rightin">
+                                    <!--<button id="anotherbutton" onclick="window.location.href='stats.php'">Statistics</button>-->
+                                </td>
+                        <?php
+						}
+						?>
+							</tr>
+						</table>
 			</div>
 		</div>
 		<div id="loginform">
-			<form id="loggingin" method="post" action="index2.php">
+			<form id="loggingin" method="post" action="index.php">
 				<input type="text" name="login_username" id="login_username" class="loginfield" maxlength="31" width="20" title="Username" />
 				<br /><input type="password" name="login_password" id="login_password" class="loginfield" maxlength="31" width="20" title="Password" />
 				<br /><input type="submit" name="submit_login" id="submit_login" value="Login" />
