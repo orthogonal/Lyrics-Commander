@@ -134,7 +134,7 @@
 					$('#rowNo').attr('value', rowNo);
 					
 					///////////TEST
-					alert(totalRows + ", " + rowNo);
+					//alert(totalRows + ", " + rowNo);
 					//////////////
 					
 					var pageVals = $('#hidden').serialize();
@@ -145,7 +145,7 @@
 						
 						//DELETE THIS, IT IS HERE FOR TESTING//
 							
-						alert("0: " + values[0] + "\n1: " + values[1] + "\n2: " + values[2] + "\n3: " + values[3]	
+						//alert("0: " + values[0] + "\n1: " + values[1] + "\n2: " + values[2] + "\n3: " + values[3]	
 									+ "\n4: " + values[4] + "\n5: " + values[5] + "\n6: " + values[6] + "\n7: " + values[7]);
 									
 						stanzaID = values[7];
