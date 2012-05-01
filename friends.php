@@ -53,7 +53,7 @@
 					VALUES ($User1ID, $User2ID)";
 					
 					$result = mysql_query($query);
-					print "You have friended <b>" . $row2["Username"] . ".</b>";
+					print "<p id=\"newfriend\">You have friended <b>" . $row2["Username"] . "</b>.</p>";
 				}
 			}
 			

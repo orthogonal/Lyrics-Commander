@@ -202,16 +202,10 @@ choicetd{
 	background-color: white;
 	}
 	
-#addfriends{
+#addfriends, #friendslist, #newfriend{
 	font-size:40px;
 
 }
-
-#friendslist{
-	font-size:40px;
-
-}
-
 p
 {
 	font-size: 26px;
