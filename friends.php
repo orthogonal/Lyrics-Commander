@@ -80,7 +80,10 @@
 			print "<p id=\"newfriend\">POTENTIAL FRIENDS</p>";
 			$queryTable="SELECT Username
 									FROM PotentialBuddies, User
-										WHERE User.UserID=PotentialBuddies.User1ID AND User1ID=$User1ID";
+										WHERE User.UserID=PotentialBuddies.User1ID AND User1ID=$User1ID AND NOT EXISTS (SELECT Username
+																																FROM Buddies, User
+																																	WHERE User.UserID=Buddies.User1ID AND User1ID=$User1ID)";
+																																	
 			$resultT=mysql_query($queryTable);
 			if(isset($resultT)) {
 				while(($rowT = mysql_fetch_array($resultT)) != null){
