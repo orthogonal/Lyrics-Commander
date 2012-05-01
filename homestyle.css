@@ -216,3 +216,16 @@ input#mysubmit
 {
 	font-size:26px;
 }
+
+div#profile input
+{
+	position:absolute;
+	left:225px;
+	width:300px;
+}
+
+div#profile textarea
+{
+	position:absolute;
+	left:225px;
+}

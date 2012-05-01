@@ -1,6 +1,6 @@
 <?php
-$artist = "coldplay";
-$song = "paradise";
+$artist = "KATIE MELUA";
+$song = "piece by piece";
 var_dump(getLyrics($artist,$song));
 
 function urlOfLyrics($artist, $song)
@@ -25,6 +25,7 @@ function getLyrics($artist,$song)
 	$startOfLyrics += strlen("<!-- start of lyrics -->") + 2;
 	$endOfLyrics = strpos($data, "<!-- end of lyrics -->");
 	$stanzas = explode("<br>\n<br>\n", substr($data, $startOfLyrics, $endOfLyrics - $startOfLyrics));
+	if(count($stanzas) == 1) $stanzas = explode("<br>\r\n<br>\r\n", substr($data, $startOfLyrics, $endOfLyrics - $startOfLyrics));
 	return $stanzas;
 }
 ?>
