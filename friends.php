@@ -30,14 +30,9 @@
 		if(isset($_POST["fUsername"]))
 		{
 			$fUsername = $_POST["fUsername"];
-			
 			$cookieinfo = explode("%", $_COOKIE['main']);
-			
 			$User1ID = $cookieinfo[0];
 			if($User1ID == "")	exit();
-			
-
-			
 			$query2="SELECT UserID,Username 
 							FROM User 
 								WHERE username='$fUsername' LIMIT 1";
@@ -56,13 +51,6 @@
 					print "<p id=\"newfriend\">You have friended <b>" . $row2["Username"] . "</b>.</p>";
 				}
 			}
-			
-		
-			
-	
-			
-			
-			
 		}
 			$cookieinfo = explode("%", $_COOKIE['main']);
 			$User1ID = $cookieinfo[0];
@@ -78,8 +66,6 @@
 			
 			while(($row = mysql_fetch_array($resultFriends)) != null){
 			$User2ID = $row["User2ID"];
-			
-			
 				$queryF="SELECT Username 
 									FROM User 
 										WHERE UserID=$User2ID LIMIT 1";
@@ -90,11 +76,17 @@
 			print "<p>" . $rowF["Username"] . "</p>";
 			
 			}
-			
-			print "<p id=\"potentialfriends\">Potential Friends</p>";
-			
-		}
-		
+			}
+			print "<p id=\"newfriend\">POTENTIAL FRIENDS</p>";
+			$queryTable="SELECT Username
+									FROM PotentialBuddies, User
+										WHERE User.UserID=PotentialBuddies.User1ID AND User1ID=$User1ID";
+			$resultT=mysql_query($queryTable);
+			if(isset($resultT)) {
+				while(($rowT = mysql_fetch_array($resultT)) != null){
+					print "<p>" . $rowT["Username"] . "</p>";
+				}
+			}
 		
 		?>
 		
