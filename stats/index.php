@@ -26,9 +26,30 @@
 <html>
 	<head>
 		<title>Statistics Test</title>
-			<link rel="stylesheet" type="text/css" href="http://lyricscommander.com/indexstyle.css" />
+			<link rel="stylesheet" type="text/css" href="../homestyle.css" />
 				<script src="../_js/jquery-1.7.js"></script>
 				<script>
+				$(document).ready(function(){
+						/*=======================================================*/
+						/*==	  The Logout Button and its functionality	   ==*/
+						/*=======================================================*/
+						
+						$("#logouttext").click(function(evt){
+							evt.preventDefault();
+							$.post("../logout.php", function(data){
+								location.href="../index.php";
+							});
+						});
+						
+						$("#logouttext").hover(function(){
+							$("#logouttext").css("color", "blue");
+							$("#logouttext").css("font-weight", 700);
+						}, function(){
+							$("#logouttext").css("color", "white");
+							$("#logouttext").css("font-weight", 400);
+						});
+				
+				
 					$(document).ready(function(){
 						hideLoading();
 					});
@@ -54,6 +75,7 @@
 							hideLoading();
 						});  
 					}); 
+				});
 				</script>
 
  
@@ -61,7 +83,12 @@
 	<body>
 		<div id="titlebar">
 			<span id="titletext">Lyrics Commander Statistics</span>
+            <?php
+				if ($loggedin) echo "<a href='' id='logouttext'>Logout</a>";
+			?>
 		</div>
+    <div id="maindiv">
+    <br><br><br>
 	<span id="everything">
 		<span id="ProfileName">
 			<?php echo "</br></br><h1>Profile: " . $username . "</h1>"; ?>
@@ -107,9 +134,8 @@
 		</span>
 		<br />
 	</span>
-		<br />
 		
-		
+	</div>
 	</body>
 </html>
  </html>

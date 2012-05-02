@@ -3,10 +3,47 @@
 		<title>Lyrics Commander Friends Page</title>
 		<link rel="stylesheet" type="text/css" href="homestyle.css" />
 		<script src="_js/jquery-1.7.js"></script>
+        <script>
+		$(document).ready(function(){
+		/*=======================================================*/
+		/*==	  The Logout Button and its functionality	   ==*/
+		/*=======================================================*/
+						
+						$("#logouttext").click(function(evt){
+							evt.preventDefault();
+							$.post("logout.php", function(data){
+								location.href="index.php";
+							});
+						});
+						
+						$("#logouttext").hover(function(){
+							$("#logouttext").css("color", "blue");
+							$("#logouttext").css("font-weight", 700);
+						}, function(){
+							$("#logouttext").css("color", "white");
+							$("#logouttext").css("font-weight", 400);
+						});
+		});
+		</script>
 	<!--k-->	
 		
 		<div id="titlebar">
 			<span id="titletext">Lyrics Commander Friends Page</span>
+            <?php
+				$loggedin = false;
+				$userid = -1;
+				$cookieinfo = explode("%", $_COOKIE['main']);
+				if ($cookieinfo[0] != null){
+					$loggedin = true;
+					$userid = $cookieinfo[0];
+				}
+				else{
+					print '<script> location.href="index.php"; </script>';
+					exit();
+				}
+			
+				if ($loggedin) echo "<a href='' id='logouttext'>Logout</a>";
+			?>
 		</div>
 		<div id="maindiv">
 		<table id="centertable">

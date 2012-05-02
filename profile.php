@@ -10,7 +10,8 @@
 		$userid = $cookieinfo[0];
 	}
 	else{
-		$userid = 1;				//CHANGE THIS LATER TO GO BACK TO HOME IF THE USER IS NOT LOGGED IN
+		print '<script> location.href="index.php"; </script>';
+		exit();
 	}
 	$query = "SELECT * FROM User WHERE UserID = $userid";
 	$result = mysql_query($query) or DIE(mysql_error());
@@ -27,13 +28,33 @@
 		<title>Lyrics Commander</title>
 		<link rel="stylesheet" type="text/css" href="homestyle.css" />
         <script src="_js/jquery-1.7.js"></script>
+        <script src="_js/md5.js"></script>
         <script>
 		/*================================================================================*/
-		/*==				The JavaScript code for the registration form.   	    	==*/
+		/*==				The JavaScript code for the update form.   	    	==*/
 		/*==  			First, it checks if all the fields have valid lengths.  		==*/
-		/*==   Then it does an AJAX call first to see if the username already exists.	==*/
 		/*================================================================================*/
-$(document).ready(function(){			
+$(document).ready(function(){
+			/*=======================================================*/
+			/*==	  The Logout Button and its functionality	   ==*/
+			/*=======================================================*/
+						
+						$("#logouttext").click(function(evt){
+							evt.preventDefault();
+							$.post("logout.php", function(data){
+								location.href="index.php";
+							});
+						});
+						
+						$("#logouttext").hover(function(){
+							$("#logouttext").css("color", "blue");
+							$("#logouttext").css("font-weight", 700);
+						}, function(){
+							$("#logouttext").css("color", "white");
+							$("#logouttext").css("font-weight", 400);
+						});
+	
+				
 		$("#updateform").submit(function(evt){
 			evt.preventDefault();
 			var fullname = $('#fullname').val();
@@ -43,10 +64,10 @@ $(document).ready(function(){
 			var image = $('#image').val();
 			var email = $('#email').val();
 							
-			if ((password1.length == 0 || ((0 < password1.length <= 31) && (password1 == password2))) && (0 < email.length <= 127) && (0 <= fullname.length <= 30) && (0 <= aboutme.length <= 500) && (0 <= image.length <= 2083)){
+			if ((password1.length == 0 || password2.length == 0 || ((0 < password1.length <= 31) && (password1 == password2))) && (0 < email.length <= 127) && (0 <= fullname.length <= 30) && (0 <= aboutme.length <= 500) && (0 <= image.length <= 2083)){
 				var query = "";
-				if(password1.length > 0)
-					var query = "UPDATE User SET FullName='" + fullname + "', AboutMe='" + aboutme + "', ProfileImage='" + image + "', Email='" + email + "', Password='" + password1 + "'";
+				if(password1.length > 0 && password2.length > 0)
+					var query = "UPDATE User SET FullName='" + fullname + "', AboutMe='" + aboutme + "', ProfileImage='" + image + "', Email='" + email + "', Password='" + MD5(password1) + "'";
 				else
 					var query = "UPDATE User SET FullName='" + fullname + "', AboutMe='" + aboutme + "', ProfileImage='" + image + "', Email='" + email + "'";
 				query = "query=" + query + "";

@@ -86,7 +86,7 @@
 						$("#logouttext").click(function(evt){
 							evt.preventDefault();
 							$.post("logout.php", function(data){
-								location.reload(true);
+								location.href="index.php";
 							});
 						});
 						
@@ -250,7 +250,7 @@
                                     <button id="friendsbutton" onclick="window.location.href='friends.php'">Friends</button>
                                 </td>
                                 <td id="rightin">
-                                    <!--<button id="anotherbutton" onclick="window.location.href='stats.php'">Statistics</button>-->
+                                    <button id="profilebutton" onclick="window.location.href='profile.php'">Profile</button>
                                 </td>
                         <?php
 						}

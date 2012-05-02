@@ -10,7 +10,8 @@
 		$userid = $cookieinfo[0];
 	}
 	else{
-		$userid = 1;				//CHANGE THIS LATER TO GO BACK TO HOME IF THE USER IS NOT LOGGED IN
+		print '<script> location.href="index.php"; </script>';
+		exit();
 	}
 	$query = "SELECT * FROM User WHERE UserID = $userid";
 	$result = mysql_query($query) or DIE(mysql_error());
@@ -33,6 +34,26 @@
 			var buttonsDown	= 0
 			
 			$(document).ready(function(){
+		/*=======================================================*/
+		/*==	  The Logout Button and its functionality	   ==*/
+		/*=======================================================*/
+						
+						$("#logouttext").click(function(evt){
+							evt.preventDefault();
+							$.post("logout.php", function(data){
+								location.href="index.php";
+							});
+						});
+						
+						$("#logouttext").hover(function(){
+							$("#logouttext").css("color", "blue");
+							$("#logouttext").css("font-weight", 700);
+						}, function(){
+							$("#logouttext").css("color", "white");
+							$("#logouttext").css("font-weight", 400);
+						});
+				
+				
 				$('#userID').attr('value', userID);
 				newStanza();
 				for (i = 0; i < 20; i++)					//Clear all the buttons and show the first stanza when the page loads.
@@ -163,7 +184,7 @@
 	<head>
 	<body>
 		<div id="titlebar">
-			<span id="titletext">Lyrics Commander</span>
+			<span id="titletext">Lyrics Commander Game</span>
 			<?php
 				if ($loggedin) echo "<a href='' id='logouttext'>Logout</a>";
 			?>
