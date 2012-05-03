@@ -80,13 +80,15 @@ foreach($artists as $artist)
 		print "$query<hr>";
 		$albumCounter++;
 		
+		//now get trackID
+		$trackID = $trackCounter;
+		
 		$query =  	"INSERT INTO Song (AlbumID, ArtistID, Name)
 					VALUES ($albumID, $artistID, '$trackName')";
 		print "$query<hr>";
 		$trackCounter++;		
 			
-		//now get trackID
-		$trackID = $trackCounter;
+
 		
 		sleep(30);	//space out crawling of azlyrics
 		$stanzas = getLyrics($artist, $trackName);
@@ -116,7 +118,7 @@ foreach($artists as $artist)
 	if($testLimit != -1 && $counter >= $testLimit)
 		break;
 		
-	file_put_contents("trackProgressCounter.txt", $counter);
+	//file_put_contents("trackProgressCounter.txt", $counter);
 }
 
 

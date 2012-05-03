@@ -2,7 +2,6 @@ Coldplay
 Radiohead
 Gotye
 Adele
-The Beatles
 Florence + the Machine
 Red Hot Chili Peppers
 Rihanna
@@ -48,7 +47,7 @@ Flo Rida
 Oasis
 blink-182
 U2
-Beyoncé
+Beyonce
 The xx
 Guns N' Roses
 The Shins
@@ -77,7 +76,7 @@ deadmau5
 Johnny Cash
 Nickelback
 Snow Patrol
-Sigur Rós
+Sigur Ros
 Chris Brown
 Calvin Harris
 Avicii
@@ -137,7 +136,7 @@ Bloc Party
 Jack Johnson
 Ellie Goulding
 Glee Cast
-Björk
+Bjork
 The Who
 Joy Division
 Fleet Foxes
@@ -172,7 +171,7 @@ Nero
 Panic! At the Disco
 The Chemical Brothers
 Creedence Clearwater Revival
-Röyksopp
+Royksopp
 The Cranberries
 The Temper Trap
 Elvis Presley
@@ -288,7 +287,7 @@ Sia
 James Blake
 Goo Goo Dolls
 Empire of the Sun
-Motörhead
+Motorhead
 City and Colour
 The Ting Tings
 Nina Simone
@@ -317,13 +316,13 @@ Within Temptation
 Cake
 Washed Out
 The Drums
-Jason Derülo
+Jason Derulo
 Kylie Minogue
 Good Charlotte
 Leonard Cohen
 TV on the Radio
 Lupe Fiasco
-Tiësto
+Tiesto
 Phil Collins
 Angus &amp; Julia Stone
 The Lonely Island
@@ -345,7 +344,7 @@ Journey
 50 Cent
 Lenny Kravitz
 The Wombats
-Michael Bublé
+Michael Buble
 Enrique Iglesias
 Sleigh Bells
 Blondie
@@ -358,7 +357,7 @@ Editors
 Shinedown
 Young the Giant
 Billy Talent
-Michel Teló
+Michel Telo
 James Blunt
 Neutral Milk Hotel
 The Used
@@ -375,7 +374,7 @@ Demi Lovato
 Peter Bjorn and John
 Best Coast
 Neon Trees
-José González
+Jose Gonzalez
 Gavin DeGraw
 Pulp
 Jeff Buckley
@@ -459,7 +458,7 @@ Zero 7
 Travis
 You Me At Six
 Kate Nash
-Emeli Sandé
+Emeli Sande
 The Weeknd
 The Raconteurs
 Real Estate
@@ -546,7 +545,7 @@ Staind
 UNKLE
 John Legend
 The Horrors
-Céline Dion
+Celine Dion
 Daughtry
 Wolfgang Amadeus Mozart
 Third Eye Blind
@@ -610,7 +609,7 @@ The Dandy Warhols
 Chuck Berry
 Plan B
 Machine Head
-Mötley Crüe
+Motley Crue
 Johann Sebastian Bach
 Sade
 Ne-Yo
@@ -716,7 +715,7 @@ Coheed and Cambria
 KT Tunstall
 Youth Lagoon
 Parkway Drive
-Frédéric Chopin
+Frederic Chopin
 Django Django
 Chromeo
 Ben Folds
@@ -763,10 +762,10 @@ The Stooges
 Boys Like Girls
 Inna
 As I Lay Dying
-Emilíana Torrini
-Blue Öyster Cult
+Emiliana Torrini
+Blue Oyster Cult
 Amy Macdonald
-Sébastien Tellier
+Sebastien Tellier
 Loreen
 David Gray
 John Coltrane
@@ -803,7 +802,7 @@ Gang Starr
 Elvis Costello
 Katatonia
 All That Remains
-Die Ärzte
+Die Arzte
 Die Antwoord
 Dinosaur Jr.
 Barenaked Ladies
@@ -833,7 +832,6 @@ Cradle of Filth
 Trey Songz
 2NE1
 Dead by April
-소녀시대
 Hot Chelle Rae
 Big Bang
 Smash Mouth
@@ -971,7 +969,7 @@ Frightened Rabbit
 Wolfgang Gartner
 Mudvayne
 Dragonette
-Sinéad O'Connor
+Sinead O'Connor
 Eagles of Death Metal
 Reel Big Fish
 Kyuss
