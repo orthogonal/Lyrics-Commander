@@ -25,34 +25,21 @@
  ?>
 <html>
 	<head>
-		<title>Statistics Test</title>
-			<link rel="stylesheet" type="text/css" href="../homestyle.css" />
+		<title><?php echo $username; ?>'s Statistics</title>
+			<link rel="stylesheet" type="text/css" href="stats_style.css" />
 				<script src="../_js/jquery-1.7.js"></script>
 				<script>
-				$(document).ready(function(){
-						/*=======================================================*/
-						/*==	  The Logout Button and its functionality	   ==*/
-						/*=======================================================*/
-						
-						$("#logouttext").click(function(evt){
-							evt.preventDefault();
-							$.post("../logout.php", function(data){
-								location.href="../index.php";
-							});
-						});
-						
-						$("#logouttext").hover(function(){
-							$("#logouttext").css("color", "blue");
-							$("#logouttext").css("font-weight", 700);
-						}, function(){
-							$("#logouttext").css("color", "white");
-							$("#logouttext").css("font-weight", 400);
-						});
-				
-				
 					$(document).ready(function(){
 						hideLoading();
 					});
+					//change color on home button
+					$("#home_text").hover(function(){
+							$("#home_text").css("color", "blue");
+							$("#home_text").css("font-weight", 700);
+						}, function(){
+							$("#home_text").css("color", "white");
+							$("#home_text").css("font-weight", 400);
+						});
 					//loading animation stuff
 					function showLoading() {
 						$("#loading").show();
@@ -75,23 +62,21 @@
 							hideLoading();
 						});  
 					}); 
-				});
+					
+
 				</script>
 
  
 	</head>
 	<body>
 		<div id="titlebar">
-			<span id="titletext">Lyrics Commander Statistics</span>
-            <?php
-				if ($loggedin) echo "<a href='' id='logouttext'>Logout</a>";
-			?>
+			<span id="titletext">Lyrics Commander</span>
+			<a href='http://www.lyricscommander.com' id = "home_text">Home</a>
 		</div>
-    <div id="maindiv">
-    <br><br><br>
-	<span id="everything">
+	<div id="content" >
+		<div id = "everything">
 		<span id="ProfileName">
-			<?php echo "</br></br><h1>Profile: " . $username . "</h1>"; ?>
+			<?php echo "<h1>" . $username . "'s Statistics</h1>"; ?>
 		</span>
 		<span id="stats">
 		<?php
@@ -126,16 +111,18 @@
 			</br>'
 			;
 		?>
-		<div id = "display_div">
+		<div id = "display_div" bgcolor="#E6E6FA">
 			<div id = "loading">
 				<img src="loader.gif" />
 			</div>
 		</div>
 		</span>
 		<br />
-	</span>
-		
+		</div>
 	</div>
+		<br />
+		
+		
 	</body>
 </html>
  </html>
