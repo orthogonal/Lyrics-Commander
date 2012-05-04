@@ -3,13 +3,17 @@ include("dynamic_queries.php");
 include("static_queries.php");
 $username = stripslashes($_POST['username']);
 $query_type = stripslashes($_POST['query']);
-if($query_type == "Personal Tagging Data"){
+$emotion = stripslashes($_POST['emotion']);
+if($query_type == "Top Songs by Emotion"){
+	getTopSongs($emotion);
+	}
+else if($query_type == "Personal Tagging Data"){
 	getPersonalTaggingData($username);
 }
-if($query_type == "Global Tagging Data"){
+else if($query_type == "Global Tagging Data"){
 	getGlobalTaggingData();
 }
-if($query_type == "Artist Tagging Data"){
+else if($query_type == "Artist Tagging Data"){
 	getArtistTaggingData($username);
 }
 else if($query_type == "Last 2 Songs"){

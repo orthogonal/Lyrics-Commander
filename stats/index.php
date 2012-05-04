@@ -30,6 +30,8 @@
 				<script src="../_js/jquery-1.7.js"></script>
 				<script>
 					$(document).ready(function(){
+						//hide the emotions select
+						hideEmotions();
 						hideLoading();
 					});
 					//change color on home button
@@ -48,15 +50,36 @@
 					function hideLoading() {
 						$("#loading").hide();
 					}
+					
+					//emotions stuff
+					function showEmotions(){
+						$("#emotions_div").show();
+					}
+					
+					function hideEmotions(){
+						$("#emotions_div").hide();
+					}
+					
+					function selectChanged(){
+						if($("#query_select").val() == "Top Songs by Emotion"){
+							showEmotions();
+						}
+						else{
+							hideEmotions();
+						}
+						
+					}
+					
 					/*
 					 *Handle the submit button:
 					 *Calls the display_query.php with ajax
 					 */
 					$(function() {  
 						$("#submit_button").click(function() {
-							var query_type = $(".query_select").val();
+							var query_type = $("#query_select").val();
+							var emotion_type = $("#emotion_select").val();
 							showLoading();
-							$.post("display_query.php", {query : query_type, username : "<?= $username ?>"}, function(data){
+							$.post("display_query.php", {emotion : emotion_type, query : query_type, username : "<?= $username ?>"}, function(data){
 								$("#display_div").html(data);
 							});
 							hideLoading();
@@ -96,16 +119,29 @@
 			//put the dynamic section here
 			echo '
 			<p1>Select Statistic To Display</br></p1>
-			<select name = "query_select" class = "query_select">
+			<select id = "query_select" class = "query_select" onchange = "selectChanged();">
 				<option>Personal Tagging Data</option>
 				<option>Global Tagging Data</option>
 				<option>Artist Tagging Data</option>
+				<option>Top Songs by Emotion</option>
 				<option>Last 2 Songs</option>
 				<option>Last 5 Songs</option>
 				<option>Last 10 Songs</option>
 				<option>Friends</option>
 				<option>All Song Tags</option>
 			</select>
+			<div id = "emotions_div">
+				<select id = "emotion_select">';
+				$query = "SELECT * FROM Tag";
+				$result = mysql_query($query) or die(mysql_error());
+				$num_rows = mysql_num_rows($result);
+				for($i = 0; $i< $num_rows; $i++){
+					echo "<option>" . mysql_result($result, $i, 1) . "</option>";
+				}	
+				
+			echo '
+				</select>
+			</div>
 			<button type = "button" id = "submit_button">Submit</button>
 			</form>
 			</br>'

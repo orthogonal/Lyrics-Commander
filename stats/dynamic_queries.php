@@ -221,4 +221,45 @@
 		}
 	}
 	
+	//gets the top five songs with the highest number of ratings with the given emotions
+	function getTopSongs($emotion){
+		//this query finds all the songs ranked with the emotion in descending order 
+		$query =  'SELECT Song.Name, Artist.Name, sum
+					FROM Song, Artist, (
+						SELECT SongID, SUM(count)AS sum
+						FROM Song,(
+							SELECT StanzaID, COUNT(*) AS count
+							FROM Rating
+							Where WordID = (
+								SELECT WordID
+								FROM Tag
+								WHERE Word ="' . $emotion .'")
+							GROUP BY StanzaID)stanzas
+						WHERE stanzas.StanzaID IN ( 
+							SELECT StanzaID
+							FROM Stanza
+							WHERE Song.SongID = Stanza.SongID )
+						GROUP BY SongID)songs
+					WHERE Song.SongID = songs.SongID AND Artist.ArtistID = Song.ArtistID
+					ORDER BY `sum` DESC
+					LIMIT 0 , 30';
+					
+		$result = mysql_query($query) or die(mysql_error());
+		$num = 5;
+		$num_rows = mysql_num_rows($result);
+		if($num_rows == 0){
+			echo "No song has been rated with this tag.";
+			return;
+		}
+		if($num_rows<5){
+			$num = $num_rows;
+			echo "Only " . $num . " songs have been rated " . $emotion . "."; 
+		}
+		echo "<h1>The Top " . $num . " " . $emotion . " Songs</h1>";
+		for($i = 0; $i<$num; $i++){
+			echo ($i+1) . ". <b>" . mysql_result($result, $i,0) . "</b>, by <b>" .mysql_result($result, $i,1) ."</b>.    Rated " . $emotion ." <b>" . mysql_result($result, $i,2) . "</b> times.</br>";
+		}
+		
+	}
+	
 ?>
