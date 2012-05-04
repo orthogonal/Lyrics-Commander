@@ -105,6 +105,7 @@
 /*================================================================================*/
 						
 						$("#registerform").submit(function(evt){
+							evt.preventDefault();
 							var username = $('#username').val();
 							var password = $('#password').val();
 							var email = $('#email').val();
@@ -113,15 +114,14 @@
 							&& (password != "Password") && (username != "Username") && (email != "E-mail Address")){
 								var query = 'SELECT * FROM User WHERE Username = "' + username + '"';
 								query = "query='" + query + "'";
-								$('#submit_register').attr("disabled", "disabled");
 								$.post("checkUsers.php", query, function(data){
 									if (data == ""){
-										$('registerform').trigger('submit');
+										//$('#registerform').submit();
+										//had trouble getting jQuery to work... so...
+										document.getElementById('registerform').submit();
 									}
 									else{
 										alert("Username already exists!");
-										$('#submit_register').removeAttr("disabled");
-										evt.preventDefault();
 									}
 								});
 							}
@@ -135,7 +135,6 @@
 								if (username.length == 0) alert("Please enter a username");
 								if (password.length == 0) alert("Please enter a password");
 								if (email.length == 0) alert("Please enter an e-mail address");
-								evt.preventDefault();
 							}
 						});
 						

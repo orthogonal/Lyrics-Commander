@@ -4,8 +4,7 @@
 	mysql_select_db($db_database) or die(mysql_error());
 	
 	$query = stripslashes($_POST['query']);
-	$query = substr($query, 1, ($query.length - 1));
-	
+	$query = substr($query, 1, (strlen($query) - 2));
 	$result = mysql_query($query) or die(mysql_error());
 	$row = mysql_fetch_row($result);
 	

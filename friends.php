@@ -112,19 +112,19 @@
 			
 			while(($row = mysql_fetch_array($resultFriends)) != null){
 			$User2ID = $row["User2ID"];
-				$queryF="SELECT Username 
+				$queryF="SELECT Username, UserID
 									FROM User 
 										WHERE UserID=$User2ID LIMIT 1";
 									
 			$resultF = mysql_query($queryF);
 			$rowF = mysql_fetch_array($resultF);
-
-			print "<p>" . $rowF["Username"] . "</p>";
+			$f = $rowF["UserID"];
+			print "<p><a style=\"color:white;\" href=\"profile.php?f=$f\" target=\"_blank\">" . $rowF["Username"] . "</a></p>";
 			
 			}
 			}
 			print "<p id=\"newfriend\">POTENTIAL FRIENDS</p>";
-			$queryTable="SELECT Username
+			$queryTable="SELECT Username, UserID
 									FROM PotentialBuddies, User
 										WHERE User.UserID=PotentialBuddies.User1ID AND User1ID=$User1ID AND NOT EXISTS (SELECT Username
 																																FROM Buddies, User
@@ -133,7 +133,8 @@
 			$resultT=mysql_query($queryTable);
 			if(isset($resultT)) {
 				while(($rowT = mysql_fetch_array($resultT)) != null){
-					print "<p>" . $rowT["Username"] . "</p>";
+					$f = $rowT["UserID"];
+					print "<p><a style=\"color:white;\" href=\"profile.php?f=$f\" target=\"_blank\">" . $rowT["Username"] . "</a></p>";
 				}
 			}
 		
