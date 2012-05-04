@@ -154,21 +154,11 @@
 																				//All the available rows will be returned and the n'th is used.
 					$('#rowNo').attr('value', rowNo);
 					
-					///////////TEST
-					//alert(totalRows + ", " + rowNo);
-					//////////////
-					
 					var pageVals = $('#hidden').serialize();
 					
 					$.post("getstanza.php", pageVals, function(data){
 						var values = data.split("&");
-						$('#lyrics').html(values[0]);
-						
-						//DELETE THIS, IT IS HERE FOR TESTING//
-							
-						//alert("0: " + values[0] + "\n1: " + values[1] + "\n2: " + values[2] + "\n3: " + values[3]	
-									//+ "\n4: " + values[4] + "\n5: " + values[5] + "\n6: " + values[6] + "\n7: " + values[7]);
-									
+						$('#lyrics').html(values[0]);					
 						stanzaID = values[7];
 						lastArtist = values[4];
 						lastSong = values[1];
