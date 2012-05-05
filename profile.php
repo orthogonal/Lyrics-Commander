@@ -89,7 +89,7 @@ $(document).ready(function(){
 	</head>
     <body>
     	<div id="titlebar">
-			<span id="titletext">Lyrics Commander Profile Page</span>
+			<span id="titletext">Lyrics Commander</span>
 			<?php
 				if ($loggedin) echo "<a href='' id='logouttext'>Logout</a>";
 			?>

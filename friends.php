@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Lyrics Commander Friends Page</title>
+		<title>Lyrics Commander</title>
 		<link rel="stylesheet" type="text/css" href="homestyle.css" />
 		<script src="_js/jquery-1.7.js"></script>
         <script>
@@ -28,7 +28,7 @@
 	<!--k-->	
 		
 		<div id="titlebar">
-			<span id="titletext">Lyrics Commander Friends Page</span>
+			<span id="titletext">Lyrics Commander</span>
             <?php
 				$loggedin = false;
 				$userid = -1;

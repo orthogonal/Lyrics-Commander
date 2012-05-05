@@ -10,8 +10,7 @@
 		$userid = $cookieinfo[0];
 	}
 	else{
-		print '<script> location.href="index.php"; </script>';
-		exit();
+		header( 'Location: http://www.lyricscommander.com' ) ;
 	}
 	$query = "SELECT * FROM User WHERE UserID = $userid";
 	$result = mysql_query($query) or DIE(mysql_error());
