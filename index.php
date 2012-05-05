@@ -273,6 +273,15 @@
 						</table>
 			</div>
 		</div>
+		
+		<div id="bottomdiv">
+			<span id="names">
+				Created by <a href="mailto:jja56@case.edu">Joseph Adams</a>, 
+				<a href="http://www.lathamcity.com">Andrew Latham</a>, 
+				<a href="http://www.amagit.com">Joshua Schwarz</a>, 
+				<a href="https://www.facebook.com/justin.white.5851">Justin White</a>
+			</span>
+		</div>
 		<div id="loginform">
 			<form id="loggingin" method="post" action="index.php">
 				<input type="text" name="login_username" id="login_username" class="loginfield" maxlength="31" width="20" title="Username" />

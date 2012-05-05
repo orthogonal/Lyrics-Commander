@@ -276,3 +276,18 @@ body{
 	position: relative;
 	top: 30px;
 }
+
+#bottomdiv{
+	position: relative;
+	top: 650px;
+	text-align: center;
+	width: 95%;
+}
+
+#names{
+	font-size: 0.6em;
+}
+
+#names>a{	
+	text-decoration: none;
+}
