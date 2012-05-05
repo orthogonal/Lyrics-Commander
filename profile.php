@@ -13,16 +13,8 @@
 		print '<script> location.href="index.php"; </script>';
 		exit();
 	}
-	$query = "SELECT * FROM User WHERE UserID = $userid";
-	$result = mysql_query($query) or DIE(mysql_error());
-	$row = mysql_fetch_row($result);
-	$name = $row[4];
-	$username = $row[1];
-	$email = $row[3];
-	$aboutMe = $row[5];
-	$image = $row[6];
+	
 ?>
-
 <html>
 	<head>
 		<title>Lyrics Commander</title>
@@ -106,6 +98,21 @@ $(document).ready(function(){
 		<table id="maintable">
 		<tr>
 		<td>
+<?php	
+
+	
+	if(isset($_GET["f"]) == false)
+	{
+		$query = "SELECT * FROM User WHERE UserID = $userid";
+		$result = mysql_query($query) or DIE(mysql_error());
+		$row = mysql_fetch_row($result);
+		$name = $row[4];
+		$username = $row[1];
+		$email = $row[3];
+		$aboutMe = $row[5];
+		$image = $row[6];
+?>
+
         <div id="profile">
         	<form id="updateform" action="profile.php" method="post">
         	<p>Username: <?php print $username; ?></p>
@@ -118,7 +125,29 @@ $(document).ready(function(){
             <p><input id="submit_update" type="submit" value="Save Changes"></p>
             </form>
         </div>
-		</td>
+		
+<?php
+	}
+    else
+    {
+		$query = "SELECT * FROM User WHERE UserID = " . $_GET["f"];
+		$result = mysql_query($query) or DIE(mysql_error());
+		$row = mysql_fetch_row($result);
+		$name = $row[4];
+		$username = $row[1];
+		$email = $row[3];
+		$aboutMe = $row[5];
+		$image = $row[6];
+    	?>
+        <p>Username: <?php print $username; ?></p>
+        <p>Full Name: <?php print $name; ?></p>
+        <!--<p>Email: <?php //print $email; ?></p>-->
+        <p>About Me: <?php print $aboutMe; ?></p>
+        <p>Profile Image: <?php print $image; ?></p>
+        <?php
+    }
+?>
+</td>
 		
 		<td>
     	</td>

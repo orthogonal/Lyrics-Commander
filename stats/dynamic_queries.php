@@ -8,7 +8,9 @@
 									FROM User
 									WHERE Username ='" . $username . "')";
 		$result = mysql_query($query) or die(mysql_error());
-		
+		if(mysql_result($result,0) == 0){
+			return 0;
+		}
 		return mysql_result($result, 0);
 	}
 	
@@ -49,6 +51,7 @@
 	}
 	//Gets the last n number of songs the user has rated
 	function getLastSongs($username, $number){
+		//gets all the songs the user has rated, ordered by the time they were entered
 		$query = 'SELECT Song.Name AS SongName, Artist.Name AS ArtistName'
 				. ' FROM Artist, Song, ('
 				. ' SELECT DISTINCT SongID'
@@ -58,20 +61,24 @@
 					. ' WHERE UserID =(SELECT UserID
 										FROM User
 										WHERE Username = "' . $username . '")'
-					. ' )stanzas'
+					. ' ORDER BY time )stanzas'
 				. ' WHERE Stanza.StanzaID = stanzas.StanzaID'
 				. ' )songs'
 			. ' WHERE Song.SongID = songs.SongID AND Song.ArtistID = Artist.ArtistID';
 			
 		$result = mysql_query($query) or die(mysql_error());
 		$num_rows = mysql_num_rows($result);
+		if($num_rows == 0){
+			echo "No Ratings :(";
+			return;
+		}
 		if($num_rows<$number){
 			$number = $num_rows;
 			echo "You have only rated " . $number . " songs.";
 		}
 		echo "<h1>Last " . $number . " Songs:</h1>";
-		for($i = 0; $i<$number; $i++){
-			echo ($i+1) . ". <b>" . mysql_result($result, $i, 0) . "</b> by ";
+		for($i = $num_rows-1; $i>$num_rows-$number-1; $i--){
+			echo ($num_rows-$i) . ". <b>" . mysql_result($result, $i, 0) . "</b> by ";
 			echo "<b>" . mysql_result($result, $i, 1) . "</b></br></br>";
 		}
 	}
@@ -92,6 +99,10 @@
 		 $count = mysql_query($query) or die(mysql_error());
 		 $number_of_tags = mysql_result($count, 0);
 		 $num_rows = mysql_num_rows($result);
+		if($num_rows == 0){
+			echo "No Ratings :(";
+			return;
+		}	
 		 
 		 echo "<table border='1'>
 		<tr>
@@ -111,11 +122,14 @@
 	function getFriendsData($username){
 		
 		//gets all the friends if the userID is User1ID1
-		$friends_query1 = 'SELECT Username, UserID FROM Buddies, User WHERE User2ID = UserID AND User1ID = (SELECT UserID FROM User WHERE Username = "' . $username . '")';
+		$friends_query1 = 'SELECT Username, UserID 
+							FROM Buddies, User 
+							WHERE User2ID = UserID AND User1ID = (SELECT UserID FROM User WHERE Username = "' . $username . '")';
 		$friends_result1 = mysql_query($friends_query1) or die(mysql_error());
 		$num_rows = mysql_num_rows($friends_result1);
-		if($num_rows = 0){
+		if($num_rows == 0){
 			echo "No Friends :(";
+			return;
 		}	
 		echo "<table border='1'>
 		<tr>
@@ -133,7 +147,9 @@
 			echo "</tr>";
 		}
 		//gets all the friends if UserID is User2ID
-		$friends_query2 = 'SELECT Username, UserID FROM Buddies, User WHERE User1ID = UserID AND User2ID = (SELECT UserID FROM User WHERE Username = "' . $username . '")';
+		$friends_query2 = 'SELECT Username, UserID 
+							FROM Buddies, User 
+							WHERE User1ID = UserID AND User2ID = (SELECT UserID FROM User WHERE Username = "' . $username . '")';
 		$friends_result2 = mysql_query($friends_query2) or die(mysql_error());
 		$num_rows = mysql_num_rows($friends_result2);
 		for($i = 0; $i<$num_rows; $i++){
@@ -203,6 +219,47 @@
 			}
 			echo "</tr>";
 		}
+	}
+	
+	//gets the top five songs with the highest number of ratings with the given emotions
+	function getTopSongs($emotion){
+		//this query finds all the songs ranked with the emotion in descending order 
+		$query =  'SELECT Song.Name, Artist.Name, sum
+					FROM Song, Artist, (
+						SELECT SongID, SUM(count)AS sum
+						FROM Song,(
+							SELECT StanzaID, COUNT(*) AS count
+							FROM Rating
+							Where WordID = (
+								SELECT WordID
+								FROM Tag
+								WHERE Word ="' . $emotion .'")
+							GROUP BY StanzaID)stanzas
+						WHERE stanzas.StanzaID IN ( 
+							SELECT StanzaID
+							FROM Stanza
+							WHERE Song.SongID = Stanza.SongID )
+						GROUP BY SongID)songs
+					WHERE Song.SongID = songs.SongID AND Artist.ArtistID = Song.ArtistID
+					ORDER BY `sum` DESC
+					LIMIT 0 , 30';
+					
+		$result = mysql_query($query) or die(mysql_error());
+		$num = 5;
+		$num_rows = mysql_num_rows($result);
+		if($num_rows == 0){
+			echo "No song has been rated with this tag.";
+			return;
+		}
+		if($num_rows<5){
+			$num = $num_rows;
+			echo "Only " . $num . " songs have been rated " . $emotion . "."; 
+		}
+		echo "<h1>The Top " . $num . " " . $emotion . " Songs</h1>";
+		for($i = 0; $i<$num; $i++){
+			echo ($i+1) . ". <b>" . mysql_result($result, $i,0) . "</b>, by <b>" .mysql_result($result, $i,1) ."</b>.    Rated " . $emotion ." <b>" . mysql_result($result, $i,2) . "</b> times.</br>";
+		}
+		
 	}
 	
 ?>
