@@ -109,10 +109,12 @@ body{
 #leftout{
 	width: 50%;
 	text-align: center;
+	vertical-align: top;
 }
 
 #rightout{
 	width: 50%;
+	vertical-align: top;
 }
 
 #leftin{

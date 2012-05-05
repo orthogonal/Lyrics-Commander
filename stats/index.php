@@ -38,7 +38,7 @@
 						
 						$("#logouttext").click(function(evt){
 							evt.preventDefault();
-							$.post("logout.php", function(data){
+							$.post("../logout.php", function(data){
 								location.href="index.php";
 							});
 						});
@@ -175,4 +175,3 @@
 		
 	</body>
 </html>
- </html>
