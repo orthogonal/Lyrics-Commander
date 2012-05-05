@@ -183,9 +183,9 @@
 		echo "<table border='1'>
 		<tr>
 		<th>Artist</th>
-		<th>No. Ratings</th>";
+		<th>#</th>";
 		for($i = 0; $i<$num_tags; $i++){
-			echo "<th>" . mysql_result($tags_result, $i) . "</th>";
+			echo "<th>" . substr(mysql_result($tags_result, $i), 0, 3) . ".</th>";
 		}
 		echo "</tr>";
 		for($i = 0; $i<$num_artists; $i++){

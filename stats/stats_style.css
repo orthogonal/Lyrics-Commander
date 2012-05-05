@@ -84,3 +84,8 @@ body{
 #ProfileName{
 	font-weight: 700;
 	}
+	
+table, td, tr, th{
+	background-color: white;
+	text-align: center;
+}
