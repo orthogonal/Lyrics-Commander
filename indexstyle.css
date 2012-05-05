@@ -97,8 +97,13 @@ body{
 	
 #centertable{
 	width: 100%;
+	height: 100%;
 	min-width: 100%;
 	margin: 5px;
+}
+
+#inrow1{
+	height: 40%;
 }
 
 #leftout{
@@ -178,53 +183,33 @@ body{
 }
 
 /*================================================================================*/
-/*	Everything having to do with the left side of the div for logged in users.	==*/
+/*	     Everything having to do with the general UI for logged in users        ==*/
 /*================================================================================*/
 
-#mainbutton{
-	font-size: 1.8em;
-	font-family: sans-serif;
+.inlink{
+	font-size: 2.4em;
+	font-family: Georgia, sans-serif;
 	width: 300px;
-	background-color: white;
-	border-radius: 25px;
+	color: #5E5E5E;
+	text-shadow: 0px 0px 2px #5E5E5E;
+	cursor: pointer;
 }
+
+/*================================================================================*/
+/*	Everything having to do with the left side of the div for logged in users.	==*/
+/*================================================================================*/
 
 /*================================================================================*/
 /*	Everything having to do with the right side of the div for logged in users.	==*/
 /*================================================================================*/
 
-#statsbutton{
-	font-size: 1.8em;
-	font-family: sans-serif;
-	width: 300px;
-	background-color: white;
-	border-radius: 25px;
-}
-
-
 /*================================================================================*/
 /*	Everything having to do with friends.	==*/
 /*================================================================================*/
 
-#friendsbutton{
-	font-size: 1.8em;
-	font-family: sans-serif;
-	width: 300px;
-	background-color: white;
-	border-radius: 25px;
-}
-
 /*================================================================================*/
 /*	Everything having to do with a user's profile.	==*/
 /*================================================================================*/
-
-#profilebutton{
-	font-size: 1.8em;
-	font-family: sans-serif;
-	width: 300px;
-	background-color: white;
-	border-radius: 25px;
-}
 
 /*================================================*/
 /*	Everything having to do with logging in.	==*/

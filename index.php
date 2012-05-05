@@ -190,6 +190,19 @@
 							$('#sheet').fadeOut(200);
 							$('#loginform').fadeOut(200);
 						});
+						
+/*==============================================================================*/
+/*== This part makes the links for when the user is logged in look cool when  ==*/
+/*== 	they are hovered over (they go to black and then come back to grey)	  ==*/
+/*==============================================================================*/
+
+						$('.inlink').hover(function(){
+							$(this).css("color", "#000000");
+							$(this).css("text-shadow", "0px 0px 2px #000000");
+						}, function(){
+							$(this).css("color", "#5E5E5E");
+							$(this).css("text-shadow", "0px 0px 2px #5E5E5E");				
+						});
 					});
 				</script>
 	</head>
@@ -203,12 +216,12 @@
 		
 		<div id="containerdiv">
 			<div id="centerdiv">
-				<table id="centertable">
-					<tr>			
+				<table id="centertable">		
 						<?php
 						if (!$loggedin) 
 						{
 						?>
+						<tr id="outrow1">	
                             <td id="leftout">
                                 <span id="join">Join The Party!</span>
                                 <form id="registerform" method="post" action="index.php">
@@ -232,29 +245,31 @@
                                     discover new bands, interact with music and learn about yourself.
                                 </span>
                             </td>
+						</tr>
 						<?php
 						}
 						else 
 						{
-						?>							
-                                <td id="leftin">
-                                    <button id="mainbutton" onclick="window.location.href='main.php'">Play Game</button>
-                                </td>
-                                <td id="rightin">
-                                    <button id="statsbutton" onclick="window.location.href='stats/'">Statistics</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td id="leftin">
-                                    <button id="friendsbutton" onclick="window.location.href='friends.php'">Friends</button>
-                                </td>
-                                <td id="rightin">
-                                    <button id="profilebutton" onclick="window.location.href='profile.php'">Profile</button>
-                                </td>
+						?>	
+						<tr id="inrow1">						
+                            <td id="leftin">
+                                <span id="mainbutton" class="inlink" onclick="window.location.href='main.php'">Play Game</span>
+                            </td>
+                            <td id="rightin">
+                                <span id="statsbutton" class="inlink" onclick="window.location.href='stats/'">Statistics</span>
+                            </td>
+                        </tr>
+                        <tr id="inrow2">
+                             <td id="leftin">
+                                <span id="friendsbutton" class="inlink" onclick="window.location.href='friends.php'">Friends</span>
+                            </td>
+                            <td id="rightin">
+                                <span id="profilebutton" class="inlink" onclick="window.location.href='profile.php'">Profile</span>
+                            </td>
+                        </tr>
                         <?php
 						}
 						?>
-							</tr>
 						</table>
 			</div>
 		</div>
