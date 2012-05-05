@@ -10,8 +10,7 @@
 		$userid = $cookieinfo[0];
 	}
 	else{
-		print '<script> location.href="index.php"; </script>';
-		exit();
+		header( 'Location: http://www.lyricscommander.com' ) ;
 	}
 	
 ?>
@@ -89,7 +88,7 @@ $(document).ready(function(){
 	</head>
     <body>
     	<div id="titlebar">
-			<span id="titletext">Lyrics Commander</span>
+			<span id="titletext" style="cursor: pointer" onclick="window.location='http://www.lyricscommander.com'">Lyrics Commander</span>
 			<?php
 				if ($loggedin) echo "<a href='' id='logouttext'>Logout</a>";
 			?>
