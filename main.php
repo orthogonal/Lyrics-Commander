@@ -173,7 +173,7 @@
 	<head>
 	<body>
 		<div id="titlebar">
-			<span id="titletext">Lyrics Commander Game</span>
+			<span id="titletext" style="cursor: pointer" onclick="window.location='http://www.lyricscommander.com'">Lyrics Commander</span>
 			<?php
 				if ($loggedin) echo "<a href='' id='logouttext'>Logout</a>";
 			?>
