@@ -93,10 +93,7 @@ $(document).ready(function(){
 				if ($loggedin) echo "<a href='' id='logouttext'>Logout</a>";
 			?>
 		</div>
-		
-		<table id="maintable">
-		<tr>
-		<td>
+	<div id="all">
 <?php	
 
 	
@@ -112,7 +109,7 @@ $(document).ready(function(){
 		$image = $row[6];
 ?>
 
-        <div id="profile">
+        <div id="profile" style="width: 70%; float: left;">
         	<form id="updateform" action="profile.php" method="post">
         	<p>Username: <?php print $username; ?></p>
             <p>Full Name: <input type="text" id="fullname" value="<?php print $name; ?>"></p>
@@ -124,6 +121,9 @@ $(document).ready(function(){
             <p><input id="submit_update" type="submit" value="Save Changes"></p>
             </form>
         </div>
+        <div id="yourpicture" style="width: 30%; float: right;">
+        	<img src="<?php print $image; ?>" />
+        </div>
 		
 <?php
 	}
@@ -131,26 +131,62 @@ $(document).ready(function(){
     {
 		$query = "SELECT * FROM User WHERE UserID = " . $_GET["f"];
 		$result = mysql_query($query) or DIE(mysql_error());
+		if ($result == null) DIE("There is no such user!");
 		$row = mysql_fetch_row($result);
+		
 		$name = $row[4];
 		$username = $row[1];
 		$email = $row[3];
 		$aboutMe = $row[5];
 		$image = $row[6];
     	?>
-        <p>Username: <?php print $username; ?></p>
-        <p>Full Name: <?php print $name; ?></p>
-        <!--<p>Email: <?php //print $email; ?></p>-->
-        <p>About Me: <?php print $aboutMe; ?></p>
-        <p>Profile Image: <?php print $image; ?></p>
+    	<div id="userinfo" style="width: 60%; float: left;">
+        	<p>Username: <?php print $username; ?></p>
+       	 	<p>Full Name: <?php print $name; ?></p>
+        	<!--<p>Email: <?php //print $email; ?></p>-->
+        	<p>About Me: <?php print $aboutMe; ?></p>
+        </div>
+        <div id="otherstuff" style="width: 40%; float: right;">
+        	<p><img src="<?php print $image; ?>" /></p>
+        	<?php
+        		$query = 'SELECT DISTINCT Tag.Word, COUNT(Rating.WordID) 
+							FROM Rating, Tag WHERE UserID =(SELECT UserID 
+															FROM User
+															WHERE Username = "' . $username . '")
+											AND Tag.WordID = Rating.WordID GROUP BY Rating.WordID LIMIT 0, 30 ';
+		 		$result = mysql_query($query) or die(mysql_error());
+		 		//gets number of ratings 
+		 		$query = 'SELECT COUNT(UserID) FROM Rating WHERE UserID =(SELECT UserID
+																		FROM User
+																		WHERE Username = "' . $username . '")';
+			 	$count = mysql_query($query) or die(mysql_error());
+		 		$number_of_tags = mysql_result($count, 0);
+		 		$num_rows = mysql_num_rows($result);
+				if($num_rows == 0){
+					echo "This user has not rated any songs yet!";
+				return;
+			}	
+		 
+		 	echo "<table border='1'>
+					<tr>
+					<th>Tag</th>
+					<th>Count</th>
+					<th>Percentage</th>
+					</tr>";
+		 	for($i = 0; $i<$num_rows; $i++){
+				echo "<tr>";
+				echo "<td>" . mysql_result($result,$i,0) . "</td>";
+				echo "<td>" . mysql_result($result,$i,1) . "</td> ";  
+				echo "<td>" . round((mysql_result($result,$i,1)/$number_of_tags)*100,1) . "%</td> </tr>";
+			}	
+			echo "</table>";
+        ?>
+        </div>
+        
+        
         <?php
     }
 ?>
-</td>
-		
-		<td>
-    	</td>
-        </tr>
-        </table>
+	</div>
 	</body>
 </html>

@@ -68,6 +68,18 @@ body{
 	text-decoration: none;
 }
 
+#all{
+	position: relative;
+	top: 35px;
+	width: 100%;
+	background-color: white;
+}
+
+#yourpicture{
+	position: relative;
+	top: 20px;
+}
+
 #maintable{
 	position: fixed;
 	top: 160px;
