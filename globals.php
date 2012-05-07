@@ -1,3 +1,3 @@
 <?php	//globals.php
-	$gl_stanzas = 90;
+	$gl_stanzas = 117;
 ?>
