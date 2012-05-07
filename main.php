@@ -1,5 +1,6 @@
 <?php
 	require_once "db_login.php";
+	require_once "globals.php";
 	$db_server = mysql_connect($db_hostname, $db_username, $db_password);
 	mysql_select_db($db_database, $db_server); 
 	$loggedin = false;
@@ -147,6 +148,10 @@
 						alert("You have already seen every lyric we have!  Please e-mail acl68@case.edu and let us know so we can add more.");
 						return;
 					}
+					
+					if (totalRows == <?php print ($gl_stanzas - 2) ?>){
+						alert("Tip: You can select multiple emotions to associate with a lyric (this is the only tip in this app)");
+						}
 					
 					rowNo = (Math.floor(Math.random() * (totalRows)))
 					if (rowNo == totalRows) rowNo = 0;							//Pick a random row number from 0 to max - 1.
