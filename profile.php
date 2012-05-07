@@ -57,22 +57,25 @@ $(document).ready(function(){
 							
 			if ((password1.length == 0 || password2.length == 0 || ((0 < password1.length <= 31) && (password1 == password2))) && (0 < email.length <= 127) && (0 <= fullname.length <= 30) && (0 <= aboutme.length <= 500) && (0 <= image.length <= 2083)){
 				var query = "";
-				if(password1.length > 0 && password2.length > 0)
+				var variables = $('#updateform').serialize();
+				$.post("updateUser.php", variables, function(data){
+					if (data == "success")
+						location.reload();
+					else
+						alert(data);
+				});
+			}
+			
+				/* if(password1.length > 0 && password2.length > 0)
 					var query = "UPDATE User SET FullName='" + fullname + "', AboutMe='" + aboutme + "', ProfileImage='" + image + "', Email='" + email + "', Password='" + MD5(password1) + "'";
 				else
 					var query = "UPDATE User SET FullName='" + fullname + "', AboutMe='" + aboutme + "', ProfileImage='" + image + "', Email='" + email + "'";
 				query = "query=" + query + "";
 				$('#submit_update').attr("disabled", "disabled");
 				$.post("updateUser.php", query, function(data){
-					if (data == ""){
-
-					}
-					else{
-						
-					}
-					location.href='profile.php';
+					alert(data);
 				});
-			}
+			} */
 			else{
 				if (password1.length > 31) alert("Password is too long");
 				if (email.length > 127) alert("E-mail Address is too long");
@@ -112,12 +115,12 @@ $(document).ready(function(){
         <div id="profile" style="width: 70%; float: left;">
         	<form id="updateform" action="profile.php" method="post">
         	<p>Username: <?php print $username; ?></p>
-            <p>Full Name: <input type="text" id="fullname" value="<?php print $name; ?>"></p>
-            <p>Update Password: <input type="password" id="password1"></p>
-            <p>Confirm Password: <input type="password" id="password2"></p>
-        	<p>Email: <input type="text" id="email" value="<?php print $email; ?>"></p>
-            <p>About Me: <textarea rows="2" cols="60" id="aboutme"><?php print $aboutMe; ?></textarea></p>
-            <p>Profile Image: <input type="text" id="image" value="<?php print $image; ?>"></p>
+            <p>Full Name: <input type="text" id="fullname" name="fullname" value="<?php print $name; ?>"></p>
+            <p>Update Password: <input type="password" name="password1" id="password1"></p>
+            <p>Confirm Password: <input type="password" name="password2" id="password2"></p>
+        	<p>Email: <input type="text" name="email" id="email" value="<?php print $email; ?>"></p>
+            <p>About Me: <textarea rows="2" cols="60" id="aboutme" name="aboutme"><?php print $aboutMe; ?></textarea></p>
+            <p>Profile Image: <input type="text" name="image" id="image" value="<?php print $image; ?>"></p>
             <p><input id="submit_update" type="submit" value="Save Changes"></p>
             </form>
         </div>

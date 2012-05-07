@@ -13,6 +13,9 @@
 		$email = $_POST["email"];
 		$password = $_POST["password"];
 		
+		$username = mysql_real_escape_string($username);
+		$email = mysql_real_escape_string($email);
+		
 /*==============================================================================================*/	
 /*==	If the fields the user has put in are valid, then insert the name into the database.  ==*/
 /*==	We don't need to check if the name already exists, because that's done on the page.   ==*/
